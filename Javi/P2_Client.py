@@ -2,38 +2,38 @@
 
 import socket
 import sys
+import Grafico
 
-message ='Vacio'
+message2 ='Vacio'
 # Creando un socket TCP/IP
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock = socket.socket()
 
 # Conecta el socket en el puerto cuando el servidor esté escuchando
-server_address = ('localhost', 10000)
+server_address = ('localhost', 10094)
 print ('conectando a %s puerto %s' % server_address, file=sys.stderr)
 sock.connect(server_address)
 
 
-try:
-    
-    while message!='salir':
-         # Enviando datos
-        print("El mensaje es: ")
-        message = input().encode()
 
-        print ('Enviando "%s"' % message, file=sys.stderr)
-        sock.sendall(message)
+    
+while message2!=48: #Numero que se puede cambiar
+    # Enviando datos
+    #print("El mensaje es: ")
+    #message = input().encode('ascii')
+    message=Grafico.MOS.encode
+    message2=float(message)
+
+    print ('Enviando "%s"' % message, file=sys.stderr)
+    sock.send(message)
 
         # Buscando respuesta
-        amount_received = 0
-        amount_expected = len(message)
+        #amount_received = 0
+        #amount_expected = len(message)
     
-        while amount_received < amount_expected:
-            data = sock.recv(19)
-            amount_received += len(data)
-            print ('recibiendo "%s"' % data, file=sys.stderr)
-    print('cerrando socket', file=sys.stderr)
-    sock.close()    
-
-finally:
-    print ('cerrando socket', file=sys.stderr)
-    sock.close()
+        #while amount_received < amount_expected:
+         #data = sock.recv(1024)
+         #amount_received += len(data)
+         #print ('recibiendo "%s"' % data, file=sys.stderr)
+        
+print('cerrando socket', file=sys.stderr)
+sock.close()    
