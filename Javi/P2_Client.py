@@ -8,7 +8,7 @@ message ='Vacio'
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Conecta el socket en el puerto cuando el servidor esté escuchando
-server_address = ('localhost', 10000)
+server_address = ('150.214.205.73', 8750)
 print ('conectando a %s puerto %s' % server_address, file=sys.stderr)
 sock.connect(server_address)
 
