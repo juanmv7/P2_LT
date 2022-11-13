@@ -7,6 +7,7 @@ This is a temporary script file.
 
 import tkinter as tk
 from tkinter import *
+import socket
 
 #VARIABLES GLOBALES
 i=0 #para iterar entre frames
@@ -31,9 +32,10 @@ def retroceder_pagina():
 
 def crear_boton(k):
     botonEnviar=tk.Button(frames[k], text="Enviar", command=codigoBoton)
-    botonEnviar.place(x=250,y=50)
-    botonAtras=tk.Button(frames[k], text="Atras", command=retroceder_pagina)
-    botonAtras.place(x=330,y=50)
+    botonEnviar.place(x=330,y=50)
+    if(k>0):
+        botonAtras=tk.Button(frames[k], text="Atras", command=retroceder_pagina)
+        botonAtras.place(x=250,y=50)
 
 def crear_etiqueta(k):
     global mensaje
@@ -48,18 +50,45 @@ def crear_entry(k):
 def codigoBoton():
      global i, frames, valores
      valores.append(cuadroTexto[i].get())
+     Conectar_server()
      frames[i].forget()
      i=i+1
      frames[i].pack(fill='both', expand=1) #mostramos el siguiente frame
-     
+     #Para crear ultimo frame
+     #if(i==13):
+        #crear ultimo frame
+
+def Conectar_server():
+    global i
+    # Programa Cliente
+    # Creando un socket TCP/IP
+    sock = socket.socket()
+
+    # Conecta el socket en el puerto cuando el servidor esté escuchando
+    server_address = ('localhost', 10800)
+    print ('conectando a %s puerto %s' % server_address)
+    sock.connect(server_address)
+    if(i<12):
+        message=valores[i].encode('ascii')
+        cabecera=(str(i)+'-')
+        print ('Enviando "%s"' % message)
+        sock.send(cabecera.encode('ascii')+ message)
+        data = sock.recv(1024)
+        print('Recibiendo "%s"' % data)
+        sock.close()
+    else:
+        data = sock.recv(1024)
+
      
 ########## CREACION VENTANA RAIZ #############
 
 root=tk.Tk() #creamos una varibale de instancia de la clase tk. Crea la ventana principal e inicia interpetre Tcl/Tk
 root.title("VoIP Network Designer") #titulo ventana
 root.config(width=600, height=400) #dimensiones ventana
+root.iconbitmap("LT_Simbolo.ico")
 
-for k in range(0,13,1):
+
+for k in range(0,14):
     crear_frame()
 
 ########## FRAME 0 ##########
@@ -68,7 +97,11 @@ frames[0].pack(fill='both', expand=1) #mostramos el primer frame. Las proximas s
 crear_boton(0)
 crear_etiqueta(0)
 crear_entry(0)
-
+#Añadir fotos
+#img =tk.PhotoImage(file="MOS_photo.png")
+#img_final=tk.Label(frames[0], image=img)
+#img_final.place(x=240,y=250)
+#img_final.pack()
 
 ####### FRAME 1 ######
 crear_boton(1)
@@ -115,9 +148,22 @@ crear_boton(9)
 crear_etiqueta(9)
 crear_entry(9)
 
+####### FRAME 10 ######
+crear_boton(10)
+crear_etiqueta(10)
+crear_entry(10)
+
+####### FRAME 11 ######
+# crear_boton(11)
+# crear_etiqueta(11)
+# crear_entry(11)
+
+
+
 
 
 
 # MAIN LOOP (FINAL)
 
 root.mainloop() #Este metodo 'dibuja' la ventana constantemente. Debera estar al final
+
