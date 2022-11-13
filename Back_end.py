@@ -35,7 +35,12 @@ TABLA_NAMES = ["G711", "G729", "G723_1_63", "G723_1_53", "G726_32", "G726_24", "
 ##
 def eleccion_codec(MOS):
     
-    MOS_elegido = 5
+    MOSes=[]
+    for j in range(0,len(TABLA)-1):
+        MOSes.append(float(TABLA[j][3]))
+    
+    MOS_elegido = max(MOSes)
+    
     for j in range(0,len(TABLA)-1):
         if ((float(TABLA[j][3])>MOS)&(float(TABLA[j][3])<MOS_elegido)):
             MOS_elegido = float(TABLA[j][3])
