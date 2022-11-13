@@ -7,15 +7,12 @@ This is a temporary script file.
 
 import tkinter as tk
 from tkinter import *
-import Back_end
 
 #VARIABLES GLOBALES
 i=0 #para iterar entre frames
 frames=[] #vector donde guardaremos los distintos frames o paginas del programa
-MOS_elegido=-1
-codec_elegido='0'
-posicion_codec=-1
 valor=0.0
+valores=[]
 
 #Crear y avanzar frame sera lo mismo. Esto implica que cada vez que volvamos atras, debemos volver a rellenar (y por tanto reecribir) el frame
 def crear_frame():
@@ -25,6 +22,10 @@ def crear_frame():
     i=i+1
     frames.append(tk.Frame(root, width=600, height=400))
     frames[i].pack(fill='both', expand=1) #mostramos el siguiente frame
+    
+    crear_boton()
+    crear_etiqueta("Introduzca el MOS")
+    crear_entry()
 
 #Al retroceder no se modifica el frame, pero luego al volver al avanzar si que tendremos que reescribirlo!
 def retroceder_pagina():
@@ -45,18 +46,15 @@ def crear_etiqueta(mensaje):
     miLabel.place(x=240,y=10)
     
 def crear_entry():
-    global valor
+    global valor, valores
     cuadroTexto=tk.Entry(frames[i],textvariable=valor)#NO SE ESTA ACTUALIZANDO VALOR
     cuadroTexto.place(x=250,y=30)
-    
+    valores.append(cuadroTexto.get())
+    print(cuadroTexto.get())
     
 def codigoBoton():
-   global MOS_elegido, codec_elegido, posicion_codec, valor
-   MOS_elegido, codec_elegido, posicion_codec= Back_end.eleccion_codec(valor)
-   print("El valor es bueno")
-   #cuadroTexto.delete(0,END) 
    crear_frame()
-    
+   
 ########## CREACION VENTANA RAIZ #############
 
 root=tk.Tk() #creamos una varibale de instancia de la clase tk. Crea la ventana principal e inicia interpetre Tcl/Tk
@@ -72,9 +70,7 @@ crear_boton()
 crear_etiqueta("Introduzca el MOS")
 crear_entry()
 
-############ FRAME 2 #############
-
-
+############ 
 
 
 
