@@ -43,8 +43,8 @@ while True:
             print ('El codec elegido es:'+codec_elegido)
             
             resultado=str(MOS_elegido)+ "-"+str(codec_elegido)+"-"
-            print(resultado)
-            connection.sendall(resultado.encode('ascii'))
+        
+            
         #Enviar al final datos como string separados por guiones cada dato, para luego separar en cliente
     finally:
         # Cerrando conexion

@@ -68,7 +68,7 @@ def eleccion_codec(MOS):
 #
 #
 ##
-def calculo_retardo(posicion_codec, retardo_red, jitter, retardo_pedido):
+def calculo_retardo(posicion_codec, retardo_pedido, retardo_red, jitter):
     
     origen = float(TABLA[posicion_codec][5]) + float(TABLA[posicion_codec][7])
     destino = 0.1*float(TABLA[posicion_codec][5]) + jitter*np.arange(1.50, 2.1, 0.50) 
@@ -136,7 +136,7 @@ def Calculo_lineas_BHT(Nc, Nl, Tpll, Pb):
 # @param[out] BW_st                Ancho de banda resultante
 # @param[out] Cumple                Indica si el ancho de banda cumple con el introducido por el cliente
 ##     
-def Calculo_BWst(Nlineas, posicion_codec, BWres, BW_cliente, encapsulacion, bool_cRTP):
+def Calculo_BWst(Nlineas, posicion_codec, BWres, BW_cliente, bool_cRTP, encapsulacion):
     
     
     if (encapsulacion==1):
