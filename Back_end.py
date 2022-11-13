@@ -5,6 +5,8 @@ Created on Wed Nov  2 11:19:11 2022
 @author: Juan
 """
 import numpy as np
+import smtplib
+from math import factorial
 
 
 codec_name = ["CBR (Kbps)", "CSS (Bytes)", "CSI (ms)", "MOS", "VPS (Bytes)", "VPS (ms)", "PPS", "RETARDO ALG (ms)"]
@@ -80,6 +82,16 @@ def calculo_retardo(posicion_codec, retardo_red, jitter, retardo_pedido):
         
     return (ret_calculado, cumple)
 
+
+def erlang(A, m):
+    L = (A ** m) / factorial(m)
+    sum_ = 0
+    for n in range(m + 1): sum_ += (A ** n) / factorial(n)
+
+    return (L / sum_)
+
+
+
 # @brief Esta funcion calcula el numero de lineas necesarias a partir de la 
 #        prob de bloqueo y el caso peor en la BHT.
 # 
@@ -87,11 +99,114 @@ def calculo_retardo(posicion_codec, retardo_red, jitter, retardo_pedido):
 # @param[in]  Nl              Numero de lineas por cliente
 # @param[in]  Tpll            Tiempo medio por llamada
 # @param[in]  Pb              Probabilidad de bloqueo
-#
+# @param[out] Nlineas         Numero de lineas en base a los Erlangs y la P_bloqueo
 #
 ##    
 def Calculo_lineas_BHT(Nc, Nl, Tpll, Pb):
     
     BHT = (Nc*Nl*Tpll)/60
+    Nlineas = 1
+    for i in range(0,1000):
+        Nlineas+=i                               #Nlineas = Nlineas + i
+        if (erlang(BHT, Nlineas) == Pb):
+            break
+    
+    return(Nlineas)
+    
+# @brief Esta funcion calcula el ancho de banda necesario para cursar Nlineas llamadas
+#        a partir del tipo de encapsulacion y del uso de cRTP o no. Además compara
+#        con el BW introducido por el cliente y si cumple o no con este.
+# 
+# @param[in]  Nlineas              Numero de llamadas
+# @param[in]  posicion_codec       Posicion del codec en TABLA
+# @param[in]  BWres                Ancho de banda de reserva (en porcentaje)
+# @param[in]  BW_cliente           Ancho de banda introducido por el cliente
+# @param[in]  encapsulacion        Tipo de encapsulacion de los paquetes 
+#                                       - Ethernet: 1
+#                                       - Ethernet 802.1q: 2
+#                                       - Ethernet q-in-q: 3
+#                                       - PPPOE: 4
+#                                       - PPPOE 802.1q: 5
+# @param[in]  bool_cRTP            Indica si se va a hacer compresión RTP
+# @param[out] BW_st                Ancho de banda resultante
+# @param[out] Cumple                Indica si el ancho de banda cumple con el introducido por el cliente
+##     
+def Calculo_BWst(Nlineas, posicion_codec, BWres, BW_cliente, encapsulacion, bool_cRTP):
     
     
+    if (encapsulacion==1):
+        if (bool_cRTP):
+            L_cab = 4 + 18
+        else: 
+            L_cab = 40 + 18
+    elif (encapsulacion==2):
+        if (bool_cRTP):
+            L_cab = 4 + 22
+        else:
+            L_cab = 40 + 22
+    elif (encapsulacion==3):
+        if (bool_cRTP):
+            L_cab = 4 + 26
+        else:
+            L_cab = 40 + 26
+    elif (encapsulacion==4):
+        if (bool_cRTP):
+            L_cab = 4 + 26
+        else: 
+            L_cab = 40 + 26
+    elif (encapsulacion==5):
+        if (bool_cRTP):
+            L_cab = 4 + 30
+        else: 
+            L_cab = 40 + 30
+            
+    L_paq = L_cab + TABLA[posicion_codec][4]
+    BWLL = L_paq*TABLA[posicion_codec][6]
+    
+    BW_st = Nlineas*BWLL* (1 + BWres/100)
+    
+    if (BW_st <= BW_cliente):
+        cumple = True
+    else:
+        cumple = False
+        
+    return(BW_st, cumple)
+    
+    
+def Envio_correo_informe(receiver_email): 
+    
+    port = 587
+    smtp_server = "correo.ugr.es"
+    sender_email = "juanmuvii@correo.ugr.es"
+
+    password = input("Escribe la password de tu correo ugr: ")
+
+
+    #Mensaje
+
+    message = """\
+    From: Empresa@correo.ugr.es
+    TO: """ + receiver_email + """\ 
+    Subject: Informe Final 
+
+    **************************************************************
+    
+    PARÁMETROS FINALES:
+        
+    - Codec: 
+    - MOS: 
+    - Retardo: 
+    - Número de Lineas: 
+    - Ancho de Banda: 
+
+
+    """
+     
+       
+    with smtplib.SMTP(smtp_server, port) as server:
+        server.ehlo()
+        server.starttls()
+        server.ehlo()
+        server.login(sender_email, password)
+        server.sendmail(sender_email, receiver_email, message)
+        server.close()
