@@ -42,7 +42,7 @@ def eleccion_codec(MOS):
     MOS_elegido = max(MOSes)
     
     for j in range(0,len(TABLA)-1):
-        if ((float(TABLA[j][3])>MOS)&(float(TABLA[j][3])<MOS_elegido)):
+        if ((float(TABLA[j][3])>=MOS)&(float(TABLA[j][3])<MOS_elegido)):
             MOS_elegido = float(TABLA[j][3])
 
 
