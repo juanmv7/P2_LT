@@ -72,12 +72,12 @@ def Conectar_server():
         message=valores[i].encode('ascii')
         cabecera=(str(i)+'-')
         print ('Enviando "%s"' % message)
-        sock.send(cabecera.encode('ascii')+ message)
-        data = sock.recv(1024)
-        print('Recibiendo "%s"' % data)
+        sock.send(cabecera.encode('ascii')+ message) 
         sock.close()
     else:
         data = sock.recv(1024)
+        print('Recibiendo "%s"' % data)
+        sock.close()
 
      
 ########## CREACION VENTANA RAIZ #############
