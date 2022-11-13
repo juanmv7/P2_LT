@@ -7,7 +7,9 @@ This is a temporary script file.
 
 import tkinter as tk
 from tkinter import *
+#from PIL import ImageTk, Image
 import socket
+
 
 #VARIABLES GLOBALES
 i=0 #para iterar entre frames
@@ -20,7 +22,7 @@ mensaje=["Introduzca el valor del MOS:", "Introduzca el retardo requerido (ms):"
 #Crear y avanzar frame sera lo mismo. Esto implica que cada vez que volvamos atras, debemos volver a rellenar (y por tanto reecribir) el frame
 def crear_frame():
     global frames
-    frames.append(tk.Frame(root, width=600, height=400))
+    frames.append(tk.Frame(root, width=400, height=200))
 
 #Al retroceder no se modifica el frame, pero luego al volver al avanzar si que tendremos que reescribirlo!
 def retroceder_pagina():
@@ -31,25 +33,29 @@ def retroceder_pagina():
     frames[i].pack(fill='both', expand=1) #mostramos el siguiente frame
 
 def crear_boton(k):
-    botonEnviar=tk.Button(frames[k], text="Enviar", command=codigoBoton)
-    botonEnviar.place(x=330,y=50)
+    
+    botonEnviar=tk.Button(frames[k], text="Enviar", command=codigoBoton,font=("Comic Sans",10),fg="black",activebackground="#90CAF9")
+    botonEnviar.place(x=250,y=55)
     if(k>0):
-        botonAtras=tk.Button(frames[k], text="Atras", command=retroceder_pagina)
-        botonAtras.place(x=250,y=50)
+        botonAtras=tk.Button(frames[k], text="Atras", command=retroceder_pagina,font=("Comic Sans",10),fg="black",activebackground="red")
+        botonAtras.place(x=175,y=55)
 
 def crear_etiqueta(k):
     global mensaje
     miLabel=tk.Label(frames[k], text=mensaje[k], fg="blue")
-    miLabel.place(x=240,y=10)
+    miLabel.place(x=165,y=10)
     
 def crear_entry(k):
     global cuadroTexto
-    cuadroTexto.append(tk.Entry(frames[k]))#NO SE ESTA ACTUALIZANDO VALOR
-    cuadroTexto[k].place(x=250,y=30)
+    cuadroTexto.append(tk.Entry(frames[k]))
+    cuadroTexto[k].place(x=175,y=30)
     
 def codigoBoton():
      global i, frames, valores
+     
      valores.append(cuadroTexto[i].get())
+    #  if valores[i]=='': #Para cuando no metes un valor no se rompa, ponga el valor 0, pero sale fallo en Back
+    #         valores[i]='0'
      Conectar_server()
      frames[i].forget()
      i=i+1
@@ -84,8 +90,9 @@ def Conectar_server():
 
 root=tk.Tk() #creamos una varibale de instancia de la clase tk. Crea la ventana principal e inicia interpetre Tcl/Tk
 root.title("VoIP Network Designer") #titulo ventana
-root.config(width=600, height=400) #dimensiones ventana
+root.config(width=600, height=200) #dimensiones ventana
 root.iconbitmap("LT_Simbolo.ico")
+root.resizable(0,0)
 
 
 for k in range(0,14):
@@ -98,10 +105,12 @@ crear_boton(0)
 crear_etiqueta(0)
 crear_entry(0)
 #Añadir fotos
-#img =tk.PhotoImage(file="MOS_photo.png")
-#img_final=tk.Label(frames[0], image=img)
-#img_final.place(x=240,y=250)
-#img_final.pack()
+# image= Image.open("MOS_photo.png")
+# image=image.resize((100,100), Image.ANTIALIAS)
+# img =ImageTk.PhotoImage(image)
+# img_final=tk.Label(frames[0], image=img)
+# img_final.place(x=240,y=250)
+# img_final.pack()
 
 ####### FRAME 1 ######
 crear_boton(1)
