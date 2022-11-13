@@ -6,46 +6,71 @@ This is a temporary script file.
 """
 
 import tkinter as tk
-from tkinter import ttk
+from tkinter import *
+import Back_end
+
+#VARIABLES GLOBALES
+i=0 #para iterar entre frames
+frames=[] #vector donde guardaremos los distintos frames o paginas del programa
+MOS_elegido=-1
+codec_elegido='0'
+posicion_codec=-1
+valor=0.0
 
 #Crear y avanzar frame sera lo mismo. Esto implica que cada vez que volvamos atras, debemos volver a rellenar (y por tanto reecribir) el frame
-def crear_frame:
-    if i>0:
-        frames[i].forget()
-        i++
-    frames[i]=tk.Frame(root, width=600, height=400)
+def crear_frame():
+    global i
+    global frames
+    frames[i].forget()
+    i=i+1
+    frames.append(tk.Frame(root, width=600, height=400))
     frames[i].pack(fill='both', expand=1) #mostramos el siguiente frame
 
 #Al retroceder no se modifica el frame, pero luego al volver al avanzar si que tendremos que reescribirlo!
-def retroceder_pagina:
+def retroceder_pagina():
+    global i
+    global frames
     frames[i].forget()# dejamos de visualizar este frame
-    i-- #iteramos
+    i=i-1 #iteramos
     frames[i].pack(fill='both', expand=1) #mostramos el siguiente frame
 
+def crear_boton():
+    botonEnviar=tk.Button(frames[i], text="Enviar", command=codigoBoton)
+    botonEnviar.place(x=250,y=50)
+    botonAtras=tk.Button(frames[i], text="Atras", command=retroceder_pagina)
+    botonAtras.place(x=330,y=50)
+
+def crear_etiqueta(mensaje):
+    miLabel=tk.Label(frames[i], text=mensaje, fg="blue")
+    miLabel.place(x=240,y=10)
+    
+def crear_entry():
+    global valor
+    cuadroTexto=tk.Entry(frames[i],textvariable=valor)#NO SE ESTA ACTUALIZANDO VALOR
+    cuadroTexto.place(x=250,y=30)
+    
+    
+def codigoBoton():
+   global MOS_elegido, codec_elegido, posicion_codec, valor
+   MOS_elegido, codec_elegido, posicion_codec= Back_end.eleccion_codec(valor)
+   print("El valor es bueno")
+   #cuadroTexto.delete(0,END) 
+   crear_frame()
+    
 ########## CREACION VENTANA RAIZ #############
 
 root=tk.Tk() #creamos una varibale de instancia de la clase tk. Crea la ventana principal e inicia interpetre Tcl/Tk
 root.title("VoIP Network Designer") #titulo ventana
-root.config(width=600, height=400) #dimensiones ventana
-frames=[10] #vector donde guardaremos los distintos frames o paginas del programa
-i=0 #para iterar entre frames
+root.config(width=650, height=350) #dimensiones ventana
 
-########## FRAME 1 ##########
-crear_frame()# FRAME 1 sera hijo de root (herencia)
-frames[i].pack(fill="both", expand=1) #empaquetamos este frame (es decir se hace visible) y ocupa toda la ventana (si el frame no tiene nada es 0x0 pixel)
-frames[i].config()
 
-etiqueta_mos=ttk.Label(frames[i], text="Introduzca el MOS minimo") #creamos instancia ttk etiqueta: mensaje que se muestra en la ventana
-etiqueta_mos.pack()
-etiqueta_mos.place(x=20,y=20) #debemos indicar la posicion del mensaje
+########## FRAME 0 ##########
+frames.append(tk.Frame(root, width=600, height=400))
+frames[i].pack(fill='both', expand=1) #mostramos el siguiente frame
 
-caja_mos=ttk.Entry(frames[i])
-caja_mos.pack()
-caja_mos.place(x=200, y=20, width=60)
-
-boton_mos=ttk.Button(frames[i], text='Siguiente', command=avanzar_pagina) #command=enviar_dato
-boton_mos.pack()
-boton_mos.place(x=20, y=60)
+crear_boton()
+crear_etiqueta("Introduzca el MOS")
+crear_entry()
 
 ############ FRAME 2 #############
 
