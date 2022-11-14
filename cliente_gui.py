@@ -16,7 +16,7 @@ i=0 #para iterar entre frames
 frames=[] #vector donde guardaremos los distintos frames o paginas del programa
 valores=[]
 cuadroTexto=[]
-mensaje=["Introduzca el valor deseado del MOS:", "Introduzca el retardo requerido (ms):", "Introduzca el retardo de red (ms):", "Introduzca el jitter total (ms):","Introduzca el número de clientes (Nc):" ,"Introduzca el numero de líneas por cliente (Nl):", "Introduzca el tiempo medio por llamada (Tpll)(Min):" ,"Introduzca la probabilidad de bloqueo (%):","Introduzca el ancho de banda de reserva (%):" ,"Introduzca el ancho de banda requerido (bps):", "Indica si quiere compresion cRTP o no:","Indica el tipo de encapsulación:"]
+mensaje=["Introduzca el valor deseado del MOS:", "Introduzca el retardo requerido (ms):", "Introduzca el retardo de red (ms):", "Introduzca el jitter total (ms):","Introduzca el número de clientes (Nc):" ,"Introduzca el numero de líneas por cliente (Nl):", "Introduzca el tiempo medio por llamada (Tpll)(Min):" ,"Introduzca la probabilidad de bloqueo (%):","Introduzca el ancho de banda de reserva (%):" ,"Introduzca el ancho de banda requerido (bps):", "Indica si quiere compresion cRTP o no:","Indica el tipo de encapsulación:\n  - Ethernet: (Introduzca) 1\n  - Ethernet 802.1q: (Introduzca) 2\n  - Ethernet q-in-q: (Introduzca) 3\n  - PPPOE: (Introduzca) 4\n  - PPPOE 802.1q: (Introduzca) 5"]
 #FALTAN MENSAJES: tipos de encapsulacion
 
 #Crear y avanzar frame sera lo mismo. Esto implica que cada vez que volvamos atras, debemos volver a rellenar (y por tanto reecribir) el frame
@@ -53,8 +53,6 @@ def crear_entry(k):
 def codigoBoton():
     global i, frames, valores
 
-    Mal=True
-
      
     valores.append(cuadroTexto[i].get())
 
@@ -86,9 +84,6 @@ def Conectar_server():
     print ('conectando a %s puerto %s' % server_address)
     sock.connect(server_address)
     if(i<12):
-
-        
-
         message=valores[i].encode('ascii')
         cabecera=(str(i)+'-')
         print ('Enviando "%s"' % message)
