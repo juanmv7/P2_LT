@@ -178,13 +178,15 @@ def Calculo_BWst(Nlineas, posicion_codec, BWres, BW_cliente, bool_cRTP, encapsul
     return(BW_st, cumple)
     
     
-def Envio_correo_informe(receiver_email): 
+def Envio_correo_informe(entradas, salidas): 
     
+    salidas = salidas.split("-")
     port = 587
     smtp_server = "correo.ugr.es"
-    sender_email = "juanmuvii@correo.ugr.es"
+    sender_email = ""
+    receiver_email = entradas[12]
 
-    password = input("Escribe la password de tu correo ugr: ")
+    #password = 
 
 
     #Mensaje

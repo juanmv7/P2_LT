@@ -60,7 +60,7 @@ while True:
             connection.sendall(resultado.encode('ascii'))
             
         if(i==12):
-            Back_end.Envio_correo_informe(datos_vector[12])
+            Back_end.Envio_correo_informe(datos_vector, resultado)
 
     finally:
         # Cerrando conexion
