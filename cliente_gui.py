@@ -51,16 +51,29 @@ def crear_entry(k):
     cuadroTexto[k].place(x=120,y=30)
     
 def codigoBoton():
-     global i, frames, valores
+    global i, frames, valores
+
+    Mal=True
+
      
-     valores.append(cuadroTexto[i].get()) 
-     Conectar_server()
-     frames[i].forget()
-     i=i+1
-     frames[i].pack(fill='both', expand=1) #mostramos el siguiente frame
-     #Para crear ultimo frame
-     #if(i==13):
+    valores.append(cuadroTexto[i].get())
+
+    #  if(valores[i]!=''): #Control error con 0 y ""
+    Conectar_server()
+    frames[i].forget()
+    i=i+1
+    frames[i].pack(fill='both', expand=1) #mostramos el siguiente frame
+    #    Mal=False
+        #Para crear ultimo frame
+        #if(i==13):
         #crear ultimo frame
+    #  else:
+    #     #Para cuando no metes un valor no se rompa, ponga el valor 0, pero sale fallo en Back
+    #      miLabel2=tk.Label(frames[i], text="Valor incorrecto,introduzca otro",font=("Comic Sans",12), fg="red")
+    #      miLabel2.place(x=80,y=80)
+    #      valores.append(cuadroTexto[i].get())
+        
+
 
 def Conectar_server():
     global i
@@ -74,8 +87,7 @@ def Conectar_server():
     sock.connect(server_address)
     if(i<12):
 
-        if valores[i]=='': #Para cuando no metes un valor no se rompa, ponga el valor 0, pero sale fallo en Back
-            valores[i]="0.1"
+        
 
         message=valores[i].encode('ascii')
         cabecera=(str(i)+'-')
