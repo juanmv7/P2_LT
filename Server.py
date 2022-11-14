@@ -50,11 +50,11 @@ while True:
             resultado=resultado+str(ret_calculado)+"-"+str(cumple)+"-"
 
         if(i==7):
-            Nlineas=Back_end.Calculo_lineas_BHT(datos_vector[4],datos_vector[5],datos_vector[6],datos_vector[7])
+            Nlineas=Back_end.Calculo_lineas_BHT(datos_vector[4],datos_vector[5],datos_vector[6],datos_vector[7]/100)
             resultado=resultado+str(Nlineas)+"-"
 
         if(i==11):
-            BW_st, cumple=Back_end.Calculo_BWst(Nlineas,posicion_codec,datos_vector[8],datos_vector[9],datos_vector[10],datos_vector[11])
+            BW_st, cumple=Back_end.Calculo_BWst(Nlineas,posicion_codec,datos_vector[8],datos_vector[9],int(datos_vector[10]),int(datos_vector[11]))
             resultado=resultado+str(BW_st)+"-"+str(cumple)+"-"
             connection.sendall(resultado.encode('ascii'))
 
