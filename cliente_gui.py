@@ -16,7 +16,7 @@ i=0 #para iterar entre frames
 frames=[] #vector donde guardaremos los distintos frames o paginas del programa
 valores=[]
 cuadroTexto=[]
-mensaje=["Introduzca el valor deseado del MOS:", "Introduzca el retardo requerido (ms):", "Introduzca el retardo de red (ms):", "Introduzca el jitter total (ms):","Introduzca el número de clientes (Nc):" ,"Introduzca el numero de líneas por cliente (Nl):", "Introduzca el tiempo medio por llamada (Tpll)(Min):" ,"Introduzca la probabilidad de bloqueo (%):","Introduzca el ancho de banda de reserva (%):" ,"Introduzca el ancho de banda requerido (bps):", "Indica si quiere compresion cRTP o no:","Indica el tipo de encapsulación:"]
+mensaje=["Introduzca el valor deseado del MOS:", "Introduzca el retardo requerido (ms):", "Introduzca el retardo de red (ms):", "Introduzca el jitter total (ms):","Introduzca el número de clientes (Nc):" ,"Introduzca el numero de líneas \n por cliente (Nl):", "Introduzca el tiempo medio \n por llamada (Tpll)(Min):" ,"Introduzca la probabilidad \n de bloqueo (%):","Introduzca el ancho de banda \n de reserva (%):" ,"Introduzca el ancho de banda \n requerido (bps):", "Indica si desea compresion cRTP  \n (Yes=1 No=0):","Introduzca el tipo de encapsulación:\n  - Ethernet --> 1\n  - Ethernet 802.1q --> 2\n  - Ethernet q-in-q --> 3\n  - PPPOE: --> 4\n  - PPPOE 802.1q: --> 5"]
 #FALTAN MENSAJES: tipos de encapsulacion
 
 #Crear y avanzar frame sera lo mismo. Esto implica que cada vez que volvamos atras, debemos volver a rellenar (y por tanto reecribir) el frame
@@ -35,10 +35,10 @@ def retroceder_pagina():
 def crear_boton(k):
     
     botonEnviar=tk.Button(frames[k], text="Enviar", command=codigoBoton,font=("Comic Sans",10),fg="black",activebackground="#90CAF9")
-    botonEnviar.place(x=195,y=55)
+    botonEnviar.place(x=195,y=85)
     if(k>0):
         botonAtras=tk.Button(frames[k], text="Atras", command=retroceder_pagina,font=("Comic Sans",10),fg="black",activebackground="red")
-        botonAtras.place(x=120,y=55)
+        botonAtras.place(x=120,y=85)
 
 def crear_etiqueta(k):
     global mensaje
@@ -48,7 +48,7 @@ def crear_etiqueta(k):
 def crear_entry(k):
     global cuadroTexto
     cuadroTexto.append(tk.Entry(frames[k]))
-    cuadroTexto[k].place(x=120,y=30)
+    cuadroTexto[k].place(x=120,y=60)
     
 def codigoBoton():
     global i, frames, valores
@@ -85,9 +85,7 @@ def Conectar_server():
     server_address = ('localhost', 10800)
     print ('conectando a %s puerto %s' % server_address)
     sock.connect(server_address)
-    if(i<12):
-
-        
+    if(i<11):
 
         message=valores[i].encode('ascii')
         cabecera=(str(i)+'-')
@@ -95,6 +93,10 @@ def Conectar_server():
         sock.send(cabecera.encode('ascii')+ message) 
         sock.close()
     else:
+        message=valores[i].encode('ascii')
+        cabecera=(str(i)+'-')
+        print ('Enviando "%s"' % message)
+        sock.send(cabecera.encode('ascii')+ message) 
         data = sock.recv(1024)
         print('Recibiendo "%s"' % data)
         sock.close()
@@ -177,9 +179,15 @@ crear_etiqueta(10)
 crear_entry(10)
 
 ####### FRAME 11 ######
-# crear_boton(11)
-# crear_etiqueta(11)
-# crear_entry(11)
+crear_etiqueta(11)
+cuadroTexto.append(tk.Entry(frames[11]))
+cuadroTexto[11].place(x=125,y=105)
+
+botonEnviar=tk.Button(frames[11], text="Enviar", command=codigoBoton,font=("Comic Sans",10),fg="black",activebackground="#90CAF9")
+botonEnviar.place(x=200,y=130)
+    
+botonAtras=tk.Button(frames[11], text="Atras", command=retroceder_pagina,font=("Comic Sans",10),fg="black",activebackground="red")
+botonAtras.place(x=125,y=130)
 
 
 
