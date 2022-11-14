@@ -28,7 +28,7 @@ while True:
         message = connection.recv(1024)
         print ('recibido "%s"' % message)
         print('Se recibe: '+ message.decode('utf-8'))
-
+        
         message=message.decode('utf-8').split("-")
         i=int(message[0])
         data=message[1]

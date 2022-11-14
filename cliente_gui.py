@@ -16,8 +16,8 @@ frames=[] #vector donde guardaremos los distintos frames o paginas del programa
 valores=[]
 cuadroTexto=[]
 mensaje=["Introduzca el valor deseado del MOS:", "Introduzca el retardo requerido (ms):", "Introduzca el retardo de red (ms):", "Introduzca el jitter total (ms):","Introduzca el número de clientes (Nc):" ,"Introduzca el numero de líneas \n por cliente (Nl):", "Introduzca el tiempo medio \n por llamada (Tpll)(Min):" ,"Introduzca la probabilidad \n de bloqueo (%):","Introduzca el ancho de banda \n de reserva (%):" ,"Introduzca el ancho de banda \n requerido (bps):", "Indica si desea compresion cRTP  \n (Yes=1 No=0):","Introduzca el tipo de encapsulación:\n  - Ethernet --> 1\n  - Ethernet 802.1q --> 2\n  - Ethernet q-in-q --> 3\n  - PPPOE: --> 4\n  - PPPOE 802.1q: --> 5"]
-solucion=""
-#FALTAN MENSAJES: tipos de encapsulacion
+
+
 
 #Crear y avanzar frame sera lo mismo. Esto implica que cada vez que volvamos atras, debemos volver a rellenar (y por tanto reecribir) el frame
 def crear_frame():
@@ -70,8 +70,6 @@ def codigoBoton():
     #      miLabel2.place(x=80,y=80)
     #      valores.append(cuadroTexto[i].get())
         
-
-
 def Conectar_server():
     global i, solucion
     # Programa Cliente
@@ -95,7 +93,10 @@ def Conectar_server():
         print ('Enviando "%s"' % message)
         sock.send(cabecera.encode('ascii')+ message) 
         data = sock.recv(1024)
-        solucion=data.decode(('utf-8')) 
+        print ('Llega "%s"' % data)
+        solucion=data.decode(('utf-8'))
+        miLabel=tk.Label(frames[12], text=solucion, fg="blue")
+        miLabel.place(x=100,y=10) 
         sock.close()
 
      
@@ -189,8 +190,7 @@ botonAtras.place(x=125,y=130)
 ####### FRAME 12 ######
 frames.append(tk.Frame(root, width=500, height=400))
 
-miLabel=tk.Label(frames[12], text=solucion, fg="black")
-miLabel.place(x=100,y=10)
+
 
 cuadroTexto.append(tk.Entry(frames[12]))
 cuadroTexto[12].place(x=125,y=105)
