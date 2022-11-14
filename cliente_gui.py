@@ -16,7 +16,7 @@ i=0 #para iterar entre frames
 frames=[] #vector donde guardaremos los distintos frames o paginas del programa
 valores=[]
 cuadroTexto=[]
-mensaje=["Introduzca el valor del MOS:", "Introduzca el retardo requerido (ms):", "Introduzca el retardo de red (ms):", "Introduzca el jitter total (ms):","Introduzca el número de clientes (Nc):" ,"Introduzca el numero de líneas por cliente (Nl):", "Introduzca el tiempo medio por llamada (Tpll):" ,"Introduzca la probabilidad de bloqueo (%):","Introduzca el ancho de banda de reserva (%):" ,"Introduzca el ancho de banda requerido (bps):", "Indica si quiere compresion cRTP o no:","Indica el tipo de encapsulación:"]
+mensaje=["Introduzca el valor del MOS:", "Introduzca el retardo requerido (ms):", "Introduzca el retardo de red (ms):", "Introduzca el jitter total (ms):","Introduzca el número de clientes (Nc):" ,"Introduzca el numero de líneas por cliente (Nl):", "Introduzca el tiempo medio por llamada (Tpll)(Min):" ,"Introduzca la probabilidad de bloqueo (%):","Introduzca el ancho de banda de reserva (%):" ,"Introduzca el ancho de banda requerido (bps):", "Indica si quiere compresion cRTP o no:","Indica el tipo de encapsulación:"]
 #FALTAN MENSAJES: tipos de encapsulacion
 
 #Crear y avanzar frame sera lo mismo. Esto implica que cada vez que volvamos atras, debemos volver a rellenar (y por tanto reecribir) el frame

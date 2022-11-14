@@ -41,10 +41,10 @@ while True:
 
             MOS_elegido, codec_elegido, posicion_codec=Back_end.eleccion_codec(datos_vector[0])
             print ('El codec elegido es:'+codec_elegido)
-            
             resultado=str(MOS_elegido)+ "-"+str(codec_elegido)+"-"
           
         #Enviar al final datos como string separados por guiones cada dato, para luego separar en cliente
+        #--------------------calculado Retardo--------------------------
         if(i==3):
             ret_calculado, cumple=Back_end.calculo_retardo(posicion_codec,datos_vector[1],datos_vector[2],datos_vector[3])
             resultado=resultado+str(ret_calculado)+"-"+str(cumple)+"-"
