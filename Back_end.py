@@ -166,7 +166,7 @@ def Calculo_BWst(Nlineas, posicion_codec, BWres, BW_cliente, bool_cRTP, encapsul
             L_cab = 40 + 30
             
     L_paq = L_cab + int(TABLA[posicion_codec][4])
-    BWLL = L_paq*int(TABLA[posicion_codec][6])
+    BWLL = L_paq*int(TABLA[posicion_codec][6])*8
     
     BW_st = Nlineas*BWLL* (1 + BWres/100)
     
@@ -178,7 +178,7 @@ def Calculo_BWst(Nlineas, posicion_codec, BWres, BW_cliente, bool_cRTP, encapsul
     return(BW_st, cumple)
     
     
-def Envio_correo_informe(entradas, salidas): 
+def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte): 
     
     salidas = salidas.split("-")
     port = 587
@@ -197,14 +197,9 @@ def Envio_correo_informe(entradas, salidas):
     Subject: Informe Final 
 
     **************************************************************
-    
-    PARÁMETROS FINALES:
+
         
-    - Codec: 
     - MOS: 
-    - Retardo: 
-    - Número de Lineas: 
-    - Ancho de Banda: 
 
 
     """
