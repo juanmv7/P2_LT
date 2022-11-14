@@ -16,7 +16,7 @@ i=0 #para iterar entre frames
 frames=[] #vector donde guardaremos los distintos frames o paginas del programa
 valores=[]
 cuadroTexto=[]
-mensaje=["Introduzca el valor del MOS:", "Introduzca el retardo requerido (ms):", "Introduzca el retardo de red (ms):", "Introduzca el jitter total (ms):","Introduzca el número de clientes (Nc):" ,"Introduzca el numero de líneas por cliente (Nl):", "Introduzca el tiempo medio por llamada (Tpll)(Min):" ,"Introduzca la probabilidad de bloqueo (%):","Introduzca el ancho de banda de reserva (%):" ,"Introduzca el ancho de banda requerido (bps):", "Indica si quiere compresion cRTP o no:","Indica el tipo de encapsulación:"]
+mensaje=["Introduzca el valor deseado del MOS:", "Introduzca el retardo requerido (ms):", "Introduzca el retardo de red (ms):", "Introduzca el jitter total (ms):","Introduzca el número de clientes (Nc):" ,"Introduzca el numero de líneas por cliente (Nl):", "Introduzca el tiempo medio por llamada (Tpll)(Min):" ,"Introduzca la probabilidad de bloqueo (%):","Introduzca el ancho de banda de reserva (%):" ,"Introduzca el ancho de banda requerido (bps):", "Indica si quiere compresion cRTP o no:","Indica el tipo de encapsulación:"]
 #FALTAN MENSAJES: tipos de encapsulacion
 
 #Crear y avanzar frame sera lo mismo. Esto implica que cada vez que volvamos atras, debemos volver a rellenar (y por tanto reecribir) el frame
@@ -35,27 +35,25 @@ def retroceder_pagina():
 def crear_boton(k):
     
     botonEnviar=tk.Button(frames[k], text="Enviar", command=codigoBoton,font=("Comic Sans",10),fg="black",activebackground="#90CAF9")
-    botonEnviar.place(x=250,y=55)
+    botonEnviar.place(x=195,y=55)
     if(k>0):
         botonAtras=tk.Button(frames[k], text="Atras", command=retroceder_pagina,font=("Comic Sans",10),fg="black",activebackground="red")
-        botonAtras.place(x=175,y=55)
+        botonAtras.place(x=120,y=55)
 
 def crear_etiqueta(k):
     global mensaje
     miLabel=tk.Label(frames[k], text=mensaje[k], fg="blue")
-    miLabel.place(x=165,y=10)
+    miLabel.place(x=100,y=10)
     
 def crear_entry(k):
     global cuadroTexto
     cuadroTexto.append(tk.Entry(frames[k]))
-    cuadroTexto[k].place(x=175,y=30)
+    cuadroTexto[k].place(x=120,y=30)
     
 def codigoBoton():
      global i, frames, valores
      
-     valores.append(cuadroTexto[i].get())
-    #  if valores[i]=='': #Para cuando no metes un valor no se rompa, ponga el valor 0, pero sale fallo en Back
-    #         valores[i]='0'
+     valores.append(cuadroTexto[i].get()) 
      Conectar_server()
      frames[i].forget()
      i=i+1
@@ -75,6 +73,10 @@ def Conectar_server():
     print ('conectando a %s puerto %s' % server_address)
     sock.connect(server_address)
     if(i<12):
+
+        if valores[i]=='': #Para cuando no metes un valor no se rompa, ponga el valor 0, pero sale fallo en Back
+            valores[i]="0.1"
+
         message=valores[i].encode('ascii')
         cabecera=(str(i)+'-')
         print ('Enviando "%s"' % message)
