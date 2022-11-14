@@ -56,7 +56,7 @@ while True:
 
         if(i==11):
             BW_st, cumple=Back_end.Calculo_BWst(Nlineas,posicion_codec,datos_vector[8],datos_vector[9],int(datos_vector[10]),int(datos_vector[11]))
-            resultado=resultado+str(BW_st)+"-"+str(cumple)+"-"
+            resultado=resultado+str(BW_st)+"-"+str(cumple)
             connection.sendall(resultado.encode('ascii'))
             
         if(i==12):

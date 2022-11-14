@@ -16,6 +16,7 @@ frames=[] #vector donde guardaremos los distintos frames o paginas del programa
 valores=[]
 cuadroTexto=[]
 mensaje=["Introduzca el valor deseado del MOS:", "Introduzca el retardo requerido (ms):", "Introduzca el retardo de red (ms):", "Introduzca el jitter total (ms):","Introduzca el número de clientes (Nc):" ,"Introduzca el numero de líneas \n por cliente (Nl):", "Introduzca el tiempo medio \n por llamada (Tpll)(Min):" ,"Introduzca la probabilidad \n de bloqueo (%):","Introduzca el ancho de banda \n de reserva (%):" ,"Introduzca el ancho de banda \n requerido (bps):", "Indica si desea compresion cRTP  \n (Yes=1 No=0):","Introduzca el tipo de encapsulación:\n  - Ethernet --> 1\n  - Ethernet 802.1q --> 2\n  - Ethernet q-in-q --> 3\n  - PPPOE: --> 4\n  - PPPOE 802.1q: --> 5"]
+solucion=""
 #FALTAN MENSAJES: tipos de encapsulacion
 
 #Crear y avanzar frame sera lo mismo. Esto implica que cada vez que volvamos atras, debemos volver a rellenar (y por tanto reecribir) el frame
@@ -51,8 +52,6 @@ def crear_entry(k):
     
 def codigoBoton():
     global i, frames, valores
-
-
      
     valores.append(cuadroTexto[i].get())
 
@@ -74,7 +73,7 @@ def codigoBoton():
 
 
 def Conectar_server():
-    global i
+    global i, solucion
     # Programa Cliente
     # Creando un socket TCP/IP
     sock = socket.socket()
@@ -96,7 +95,7 @@ def Conectar_server():
         print ('Enviando "%s"' % message)
         sock.send(cabecera.encode('ascii')+ message) 
         data = sock.recv(1024)
-        print('Recibiendo "%s"' % data)
+        solucion=data.decode(('utf-8')) 
         sock.close()
 
      
@@ -104,12 +103,12 @@ def Conectar_server():
 
 root=tk.Tk() #creamos una varibale de instancia de la clase tk. Crea la ventana principal e inicia interpetre Tcl/Tk
 root.title("VoIP Network Designer") #titulo ventana
-root.config(width=600, height=200) #dimensiones ventana
+root.config(width=600, height=300) #dimensiones ventana
 root.iconbitmap("LT_Simbolo.ico")
 root.resizable(0,0)
 
 
-for k in range(0,14):
+for k in range(0,12):
     crear_frame()
 
 ########## FRAME 0 ##########
@@ -187,10 +186,20 @@ botonEnviar.place(x=200,y=130)
 botonAtras=tk.Button(frames[11], text="Atras", command=retroceder_pagina,font=("Comic Sans",10),fg="black",activebackground="red")
 botonAtras.place(x=125,y=130)
 
+####### FRAME 12 ######
+frames.append(tk.Frame(root, width=500, height=400))
 
+miLabel=tk.Label(frames[12], text=solucion, fg="black")
+miLabel.place(x=100,y=10)
 
+cuadroTexto.append(tk.Entry(frames[12]))
+cuadroTexto[12].place(x=125,y=105)
 
-
+botonEnviar=tk.Button(frames[12], text="Enviar Correo", command=codigoBoton,font=("Comic Sans",10),fg="black",activebackground="#90CAF9")
+botonEnviar.place(x=200,y=130)
+    
+botonAtras=tk.Button(frames[12], text="Atras", command=retroceder_pagina,font=("Comic Sans",10),fg="black",activebackground="red")
+botonAtras.place(x=125,y=130)
 
 # MAIN LOOP (FINAL)
 
