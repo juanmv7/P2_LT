@@ -10,7 +10,6 @@ from tkinter import *
 #from PIL import ImageTk, Image
 import socket
 
-
 #VARIABLES GLOBALES
 i=0 #para iterar entre frames
 frames=[] #vector donde guardaremos los distintos frames o paginas del programa
