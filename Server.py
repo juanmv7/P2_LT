@@ -3,7 +3,7 @@
 import socket
 import Back_end
 
-datos_vector=[0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+datos_vector=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 resultado=""
 # Se crea el socket TCP/IP
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -32,7 +32,8 @@ while True:
         message=message.decode('utf-8').split("-")
         i=int(message[0])
         data=message[1]
-        datos_vector[i]=float(data)
+        if (i<12):
+            datos_vector[i]=float(data)
 
 
 
@@ -57,6 +58,9 @@ while True:
             BW_st, cumple=Back_end.Calculo_BWst(Nlineas,posicion_codec,datos_vector[8],datos_vector[9],int(datos_vector[10]),int(datos_vector[11]))
             resultado=resultado+str(BW_st)+"-"+str(cumple)+"-"
             connection.sendall(resultado.encode('ascii'))
+            
+        if(i==12):
+            Back_end.Envio_correo_informe(datos_vector[12])
 
     finally:
         # Cerrando conexion

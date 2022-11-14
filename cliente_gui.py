@@ -53,7 +53,6 @@ def crear_entry(k):
 def codigoBoton():
     global i, frames, valores
 
-    Mal=True
 
      
     valores.append(cuadroTexto[i].get())
