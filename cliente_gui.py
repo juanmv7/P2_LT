@@ -48,6 +48,7 @@ def crear_etiqueta(k):
 def crear_entry(k):
     global cuadroTexto
     cuadroTexto.append(tk.Entry(frames[k]))
+    cuadroTexto[k].config(justify=CENTER)
     cuadroTexto[k].place(x=120,y=60)
     
 def codigoBoton():
@@ -95,19 +96,28 @@ def Conectar_server():
         data = sock.recv(1024)
         print ('Llega "%s"' % data)
         solucion=data.decode(('utf-8'))
+        label_solucion(solucion)
         
         sock.close()
 
-def label_solucion():
-    global solucion
+def label_solucion(solucion):
+    
     solucion=solucion.split("-")
-    if(solucion[3]=="False"|solucion[6]):
-        solucion[3]="no"
-    if(solucion[3]=="True"|solucion[6]):
-        solucion[3]="si"
-    solucion_Final="-El MOS elegido es: "+ solucion[0] + "\n -El Codec elegido es:" + solucion[1]+ "\n -El retardo calculado es:"+ solucion[2]+ "\n -El retardo requerido" + solucion[3]+ "cumple con las especificaciones del codec elegido" + "\n -El número de líneas es: "+ solucion[4]+ "\n-El ancho de banda resultante es: "+ solucion[5]+ "\n-El ancho de banda pedido "+solucion[6]+"cumple con las especificaciones del codec elegido"
+    if(solucion[3]=="False" or solucion[6]=="False"):
+        solucion[3]="NO"
+        solucion[6]="NO"
+    if(solucion[3]=="True" or solucion[6]=="True"):
+        solucion[3]="SI"
+        solucion[6]="SI"
+    solucion_Final="\n -El MOS elegido es: "+ solucion[0] + "\n -El Codec elegido es: " + solucion[1]+ "\n -El retardo calculado es: "+ solucion[2]+ " ms \n -El retardo requerido " + solucion[3]+ " cumple con las especificaciones del codec elegido" + "\n -El número de líneas es: "+ solucion[4]+ "\n-El ancho de banda resultante es: "+ solucion[5]+" bps \n-El ancho de banda pedido "+solucion[6]+" cumple con las especificaciones del codec elegido"
+   
     miLabel=tk.Label(frames[12], text=solucion_Final, fg="blue")
-    miLabel.place(x=100,y=10) 
+    miLabel2=tk.Label(frames[12], text="Informe Resultados:", fg="black",font=("Comic Sans",12))
+    miLabel3=tk.Label(frames[12], text="Introduzca su correo para \n un informe más detallado:", fg="blue")
+    
+    miLabel.place(x=100,y=40)
+    miLabel2.place(x=250,y=20) 
+    miLabel3.place(x=90,y=190)
      
 ########## CREACION VENTANA RAIZ #############
 
@@ -188,6 +198,7 @@ crear_entry(10)
 ####### FRAME 11 ######
 crear_etiqueta(11)
 cuadroTexto.append(tk.Entry(frames[11]))
+cuadroTexto[11].config(justify=CENTER)
 cuadroTexto[11].place(x=125,y=105)
 
 botonEnviar=tk.Button(frames[11], text="Enviar", command=codigoBoton,font=("Comic Sans",10),fg="black",activebackground="#90CAF9")
@@ -197,18 +208,18 @@ botonAtras=tk.Button(frames[11], text="Atras", command=retroceder_pagina,font=("
 botonAtras.place(x=125,y=130)
 
 ####### FRAME 12 ######
-frames.append(tk.Frame(root, width=500, height=400))
-
-
+frames.append(tk.Frame(root, width=600, height=400))
 
 cuadroTexto.append(tk.Entry(frames[12]))
-cuadroTexto[12].place(x=125,y=105)
+cuadroTexto[12].config(justify=CENTER)
+cuadroTexto[12].place(x=250,y=200)
+
 
 botonEnviar=tk.Button(frames[12], text="Enviar Correo", command=codigoBoton,font=("Comic Sans",10),fg="black",activebackground="#90CAF9")
-botonEnviar.place(x=200,y=130)
+botonEnviar.place(x=325,y=225)
     
 botonAtras=tk.Button(frames[12], text="Atras", command=retroceder_pagina,font=("Comic Sans",10),fg="black",activebackground="red")
-botonAtras.place(x=125,y=130)
+botonAtras.place(x=245,y=225)
 
 # MAIN LOOP (FINAL)
 
