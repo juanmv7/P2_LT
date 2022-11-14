@@ -95,10 +95,19 @@ def Conectar_server():
         data = sock.recv(1024)
         print ('Llega "%s"' % data)
         solucion=data.decode(('utf-8'))
-        miLabel=tk.Label(frames[12], text=solucion, fg="blue")
-        miLabel.place(x=100,y=10) 
+        
         sock.close()
 
+def label_solucion():
+    global solucion
+    solucion=solucion.split("-")
+    if(solucion[3]=="False"|solucion[6]):
+        solucion[3]="no"
+    if(solucion[3]=="True"|solucion[6]):
+        solucion[3]="si"
+    solucion_Final="-El MOS elegido es: "+ solucion[0] + "\n -El Codec elegido es:" + solucion[1]+ "\n -El retardo calculado es:"+ solucion[2]+ "\n -El retardo requerido" + solucion[3]+ "cumple con las especificaciones del codec elegido" + "\n -El número de líneas es: "+ solucion[4]+ "\n-El ancho de banda resultante es: "+ solucion[5]+ "\n-El ancho de banda pedido "+solucion[6]+"cumple con las especificaciones del codec elegido"
+    miLabel=tk.Label(frames[12], text=solucion_Final, fg="blue")
+    miLabel.place(x=100,y=10) 
      
 ########## CREACION VENTANA RAIZ #############
 
