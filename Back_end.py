@@ -102,7 +102,7 @@ def erlang(A, m):
 # 
 # @param[in]  Nc              Numero de clientes
 # @param[in]  Nl              Numero de lineas por cliente
-# @param[in]  Tpll            Tiempo medio por llamada
+# @param[in]  Tpll            Tiempo medio por llamada (min)
 # @param[in]  Pb              Probabilidad de bloqueo
 # @param[out] Nlineas         Numero de lineas en base a los Erlangs y la P_bloqueo
 #
@@ -111,9 +111,9 @@ def Calculo_lineas_BHT(Nc, Nl, Tpll, Pb):
     
     BHT = (Nc*Nl*Tpll)/60
     Nlineas = 1
-    for i in range(0,1000):
+    for i in range(1,1000):
         Nlineas+=i                               #Nlineas = Nlineas + i
-        if (erlang(BHT, Nlineas) == Pb):
+        if (erlang(int(BHT), Nlineas) <= Pb):
             break
     
     return(Nlineas)
