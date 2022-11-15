@@ -2,7 +2,7 @@
 """
 Created on Wed Nov  2 11:19:11 2022
 
-@author: Juan
+@author: Juan Muñoz
 """
 import numpy as np
 import smtplib
@@ -88,6 +88,15 @@ def calculo_retardo(posicion_codec, retardo_pedido, retardo_red, jitter):
     return (ret_calculado, cumple)
 
 
+
+# @brief   Esta funcion calcula la probabilidad de bloqueo frente a los recursos 
+#          (lineas) y los Erlangs.
+# 
+# @param[in]  A             Erlangs
+# @param[in]  m             Número de lineas 
+# @param[out] Pb            Probabilidad de bloqueo
+#
+##   
 def erlang(A, m):
     L = (A ** m) / factorial(m)
     sum_ = 0
@@ -165,8 +174,8 @@ def Calculo_BWst(Nlineas, posicion_codec, BWres, BW_cliente, bool_cRTP, encapsul
         else: 
             L_cab = 40 + 30
             
-    L_paq = L_cab + int(TABLA[posicion_codec][4])
-    BWLL = L_paq*int(TABLA[posicion_codec][6])*8
+    L_paq = L_cab + float(TABLA[posicion_codec][4])
+    BWLL = L_paq*float(TABLA[posicion_codec][6])*8
     
     BW_st = Nlineas*BWLL* (1 + BWres/100)
     

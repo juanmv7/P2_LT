@@ -28,12 +28,15 @@ while True:
     connection, client_address = sock.accept()
     try:
         print ('Conectado')
-
-        # Recibe los datos en trozos y reetransmite
-        
         message = connection.recv(1024)
         print ('recibido "%s"' % message)
         print('Se recibe: '+ message.decode('utf-8'))
+        
+        # Recibimos los datos y separamos cabecera de datos para introducirlo en el
+        # vector correspondiente. Tenemos el vector datos_vector que en cada posición de i
+        # guarda un valor. i nos indica que tipo de dato es y esa es la cabecera que hemos pasado
+        # Importante: i depende del frame en el que estemos y al estar cada dato asociado a un frame,
+        # eso hace que i esté asociado a un tipo de dato. Consultar README para más información.
         
         datos_vector_cte.append(message.decode('utf-8'))
         message=message.decode('utf-8').split("-")
@@ -41,7 +44,7 @@ while True:
         i=int(message[0])
         data=message[1]
 
-        #Va creando el vector con los datos  finales, dependiendo de la cabecera coloca en una posición
+        # Tenemos que pasar los datos a floar (general) ya que vienen en forma de str. El 12 es el correo así que NO.
         if (i<12):
             datos_vector[i]=float(data)
 
@@ -94,6 +97,11 @@ while True:
         #--------------------Envio_correo--------------------------
         #Añadimos  la dirección de correo al vector de datos y
         # y usamos la funcion Envio_correo_informe del Back_END
+        
+        # Hasta ahora no se ha mencionado datos_vector_cte y resultado_cte. Son 
+        # 2 vectores que contienen todos las entradas del cliente. Para resultados 
+        # he añadido una cabecera similar a la de datos_vector con valores de X- 
+        # que dependen del tipo de resultado. Consultar README para más información
     
         if(i==12):
             datos_vector[i]=data 
