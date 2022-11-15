@@ -174,8 +174,8 @@ def Calculo_BWst(Nlineas, posicion_codec, BWres, BW_cliente, bool_cRTP, encapsul
         else: 
             L_cab = 40 + 30
             
-    L_paq = L_cab + int(TABLA[posicion_codec][4])
-    BWLL = L_paq*int(TABLA[posicion_codec][6])*8
+    L_paq = L_cab + float(TABLA[posicion_codec][4])
+    BWLL = L_paq*float(TABLA[posicion_codec][6])*8
     
     BW_st = Nlineas*BWLL* (1 + BWres/100)
     

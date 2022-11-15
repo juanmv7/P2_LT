@@ -78,6 +78,7 @@ def check_errors():
         messagebox.showerror('VoIP Network Designer', 'Error: La entrada no se esperaba alfanumérica. Vuelva Atrás')
         valores[i]='1'
         
+        
     if ((' ' in valores[i])):
         messagebox.showerror('VoIP Network Designer', 'Error: La entrada no puede contener espacios. Vuelva Atrás')
         valores[i]='1'
@@ -154,7 +155,9 @@ for k in range(0,12):
     crear_frame()
 
 ########## FRAME 0 ##########
+frames[0].config(width=400, height=400)
 frames[0].pack(fill='both', expand=1) #mostramos el primer frame. Las proximas se mostraran con codigo boton
+
 
 crear_boton(0)
 crear_etiqueta(0)
@@ -162,16 +165,17 @@ crear_entry(0)
 #Añadir fotos
 imagen= tk.PhotoImage(file="MOS_photo.png")
 img_final=tk.Label(frames[0], image=imagen)
-img_final.place(x=75,y=150)
+img_final.place(x=50,y=150)
 
 
 ####### FRAME 1 ######
+frames[1].config(width=400, height=400)
 crear_boton(1)
 crear_etiqueta(1)
 crear_entry(1)
 imagen2= tk.PhotoImage(file="Retardo_photo.png")
 img_final2=tk.Label(frames[1], image=imagen2)
-img_final2.place(x=75,y=150)
+img_final2.place(x=50,y=150)
 
 ####### FRAME 2 ######
 crear_boton(2)
