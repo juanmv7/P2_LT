@@ -2,7 +2,6 @@
 """
 Spyder Editor
 
-This is a temporary script file.
 """
 
 import tkinter as tk
@@ -73,12 +72,15 @@ def check_errors():
     global valores
     if ((valores[i].isspace()) or (valores[i]=='')):
         messagebox.showerror('VoIP Network Designer', 'Error: No ha introducido nada. Vuelva Atrás.')
-    
+        valores[i]='1'
+        
     if ((valores[i].isalpha())):
         messagebox.showerror('VoIP Network Designer', 'Error: La entrada no se esperaba alfanumérica. Vuelva Atrás')
-    
+        valores[i]='1'
+        
     if ((' ' in valores[i])):
         messagebox.showerror('VoIP Network Designer', 'Error: La entrada no puede contener espacios. Vuelva Atrás')
+        valores[i]='1'
         
 # Funcion para establecer conexion TCP con el servidor
 def conectar_server():

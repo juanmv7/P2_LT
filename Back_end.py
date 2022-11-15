@@ -2,7 +2,7 @@
 """
 Created on Wed Nov  2 11:19:11 2022
 
-@author: Juan
+@author: Juan Muñoz
 """
 import numpy as np
 import smtplib
