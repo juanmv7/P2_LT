@@ -7,6 +7,8 @@ This is a temporary script file.
 
 import tkinter as tk
 from tkinter import *
+from tkinter import messagebox
+
 #from PIL import ImageTk, Image
 import socket
 
@@ -60,7 +62,7 @@ def codigoBoton():
     global i, frames, valores
      
     valores.append(cuadroTexto[i].get())
-
+    check_errors()
     #  if(valores[i]!=''): #Control error con 0 y ""
     conectar_server()
     frames[i].forget()
@@ -76,7 +78,16 @@ def codigoBoton():
     #      miLabel2.place(x=80,y=80)
     #      valores.append(cuadroTexto[i].get())
 
+def check_errors():
+    global valores
     
+    if (not(valores[i].isspace()) or (valores[i]=='')):
+        messagebox.showerror('VoIP Network Designer', 'Error: No ha introducido nada. Vuelva Atrás.')
+    
+    if (not(valores[i].isalpha())):
+        messagebox.showerror('VoIP Network Designer', 'Error: La entrada no se esperaba alfanumérica. Vuelva Atrás')
+        
+        
 def conectar_server():
     global i, solucion
     # Programa Cliente
