@@ -180,35 +180,97 @@ def Calculo_BWst(Nlineas, posicion_codec, BWres, BW_cliente, bool_cRTP, encapsul
     
 def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte): 
     
-    salidas = salidas.split("-")
-    port = 587
-    smtp_server = "correo.ugr.es"
-    sender_email = ""
-    receiver_email = entradas[12]
+#"Introduzca el valor deseado del MOS:"0
+#"Introduzca el retardo requerido (ms):"#1
+##"Introduzca el retardo de red (ms):"#2
+#"Introduzca el jitter total (ms):"#3
+#"Introduzca el número de clientes (Nc):"#4
+#"Introduzca el numero de líneas \n por cliente (Nl):"#5
+#"Introduzca el tiempo medio por \n llamada (Tpll)(Min):"#6
+#"   Introduzca la probabilidad \n de bloqueo (%):"#7
+#"  Introduzca el ancho de banda \n de reserva (%):"#8
+#"  Introduzca el ancho de banda \n requerido (bps):"#9
+#"Indica si desea compresion cRTP  \n (Yes=1 No=0):"#10
+#"Introduzca el tipo de encapsulación:"]#11##
+
+    #port = 587
+    #smtp_server = "correo.ugr.es"
+    #sender_email = ""
+    #receiver_email = entradas[12]
+
+
+    j=0
+    k=0
+    #inicializamos vectores
+    MOS=[]
+    retardo=[]
+    retardo_red=[]
+    jitter=[]
+    nc=[]
+    nl=[]
+    tpll=[]
+    pb=[]
+    banda_requerido=[]
+    banda_reserva=[]
+    cRTP=[]
+    encapsulacion=[]
+    entradas_sin_cabecera=[]
+    entradas_sin_guiones=[]
+    cabeceras_de_entradas=[]
+    
+    
+    entradas_cte=["0-23","0-23","0-23","3-45"]
+    for z in range(0,len(entradas_cte)):
+        entradas_sin_guiones.append(entradas_cte[z].split("-"))
+    for j in range(0,len(entradas_sin_guiones)):
+        cabeceras_de_entradas.append(entradas_sin_guiones[j][0])
+        entradas_sin_cabecera.append(entradas_sin_guiones[j][1])
+    for k in range(0,len(cabeceras_de_entradas)):
+        if(cabeceras_de_entradas[k]=='0'):
+            MOS.append(entradas_sin_cabecera[k]) #introduce entradas_sin_cabecera[k] en la siguiente posición de MOS
+        elif(cabeceras_de_entradas[k]=='1'):
+            retardo.append(entradas_sin_cabecera[k])
+        elif(cabeceras_de_entradas[k]=='2'):
+            retardo_red.append(entradas_sin_cabecera[k])
+        elif(cabeceras_de_entradas[k]=='3'):
+            jitter.append(entradas_sin_cabecera[k])
+        elif(cabeceras_de_entradas[k]=='4'):
+            nc.append(entradas_sin_cabecera[k])
+        elif(cabeceras_de_entradas[k]=='5'):
+            nl.append(entradas_sin_cabecera[k])
+        elif(cabeceras_de_entradas[k]=='6'):
+            tpll.append(entradas_sin_cabecera[k])
+        elif(cabeceras_de_entradas[k]=='7'):
+            pb.append(entradas_sin_cabecera[k])
+        elif(cabeceras_de_entradas[k]=='8'):
+            banda_reserva.append(entradas_sin_cabecera[k])
+        elif(cabeceras_de_entradas[k]=='9'):
+            banda_requerido.append(entradas_sin_cabecera[k])
+        elif(cabeceras_de_entradas[k]=='10'):
+            cRTP.append(entradas_sin_cabecera[k])
+        elif(cabeceras_de_entradas[k]=='11'):
+            encapsulacion.append(entradas_sin_cabecera[k])
+    print(entradas_sin_cabecera)
+    print(entradas_sin_guiones)
+    for i in range(0,len(MOS)):
+        MOS[i]=int(MOS[i]) #pasamos de una lista de str a una lista de int
+    MOS=str(MOS) #luego pasamos de lista a str
 
     #password = 
 
 
     #Mensaje
+    
+    receiver_email='pp'
 
-    message = """\
+    message = """
+    
     From: Empresa@correo.ugr.es
-    TO: """ + receiver_email + """\ 
+    TO: """ + receiver_email + """
     Subject: Informe Final 
+    
+    MOS: """+MOS+""""
 
     **************************************************************
-
         
-    - MOS: 
-
-
-    """
-     
-       
-    with smtplib.SMTP(smtp_server, port) as server:
-        server.ehlo()
-        server.starttls()
-        server.ehlo()
-        server.login(sender_email, password)
-        server.sendmail(sender_email, receiver_email, message)
-        server.close()
+    """     
