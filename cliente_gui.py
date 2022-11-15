@@ -30,7 +30,7 @@ def crear_frame():
 #Al retroceder no se modifica el frame, pero luego al volver al avanzar si que tendremos que reescribirlo!
 def retroceder_pagina():
     global i, frames, valores
-    valores.pop()
+    valores.pop()#para borrar el ultimo valor
     frames[i].forget()# dejamos de visualizar este frame
     i=i-1 #iteramos
     frames[i].pack(fill='both', expand=1) #mostramos el siguiente frame
@@ -71,17 +71,19 @@ def codigoBoton():
 def check_errors():
     global valores
     if ((valores[i].isspace()) or (valores[i]=='')):
-        messagebox.showerror('VoIP Network Designer', 'Error: No ha introducido nada. Vuelva Atrás.')
+        messagebox.showerror('VoIP Network Designer', 'Error: No ha introducido nada.')
         valores[i]='1'
+        retroceder_pagina()
         
     if ((valores[i].isalpha())):
-        messagebox.showerror('VoIP Network Designer', 'Error: La entrada no se esperaba alfanumérica. Vuelva Atrás')
+        messagebox.showerror('VoIP Network Designer', 'Error: La entrada no se esperaba alfanumérica.')
         valores[i]='1'
-        
+        retroceder_pagina()
         
     if ((' ' in valores[i])):
-        messagebox.showerror('VoIP Network Designer', 'Error: La entrada no puede contener espacios. Vuelva Atrás')
+        messagebox.showerror('VoIP Network Designer', 'Error: La entrada no puede contener espacios.')
         valores[i]='1'
+        retroceder_pagina()
         
 # Funcion para establecer conexion TCP con el servidor
 def conectar_server():
@@ -139,19 +141,19 @@ def enviar_correo():
     conectar_server()
     miLabel4=tk.Label(frames[12], text="Se ha enviado el informe a su correo.", fg="green",bg="lightblue",font=("Comic Sans",10))
     miLabel4.place(x=230,y=260)
-
-
+    messagebox.showinfo('VoIP Network Designer', 'Se ha enviado el correo.')
+    root.destroy() #el programa acaba y cerramos la ventana
 
 ########## CREACION VENTANA RAIZ #############
 
 root=tk.Tk() #creamos una varibale de instancia de la clase tk. Crea la ventana principal e inicia interpetre Tcl/Tk
 root.title("VoIP Network Designer") #titulo ventana
 root.config(width=600, height=300) #dimensiones ventana
-root.iconbitmap("LT_Simbolo.ico")
-root.resizable(0,0)
+root.iconbitmap("LT_Simbolo.ico") #icono
+root.resizable(0,0) 
 
 
-for k in range(0,12):
+for k in range(0,13):
     crear_frame()
 
 ########## FRAME 0 ##########
@@ -237,7 +239,7 @@ botonAtras=tk.Button(frames[11], text="Atras", command=retroceder_pagina,font=("
 botonAtras.place(x=125,y=130)
 
 ####### FRAME 12 ######
-frames.append(tk.Frame(root, width=600, height=400,bg="lightblue"))
+frames[12].config(width=600, height=400)
 
 cuadroTexto.append(tk.Entry(frames[12]))
 cuadroTexto[12].config(justify=CENTER)
