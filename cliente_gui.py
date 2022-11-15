@@ -24,7 +24,7 @@ mensaje=["Introduzca el valor deseado del MOS:", "Introduzca el retardo requerid
 #Crear y avanzar frame sera lo mismo. Esto implica que cada vez que volvamos atras, debemos volver a rellenar (y por tanto reecribir) el frame
 def crear_frame():
     global frames
-    frames.append(tk.Frame(root, width=400, height=400,bg="lightblue"))
+    frames.append(tk.Frame(root, width=400, height=200,bg="lightblue"))
 
 
 #Al retroceder no se modifica el frame, pero luego al volver al avanzar si que tendremos que reescribirlo!
@@ -145,7 +145,7 @@ def enviar_correo():
 
 root=tk.Tk() #creamos una varibale de instancia de la clase tk. Crea la ventana principal e inicia interpetre Tcl/Tk
 root.title("VoIP Network Designer") #titulo ventana
-root.config(width=400, height=400) #dimensiones ventana
+root.config(width=600, height=300) #dimensiones ventana
 root.iconbitmap("LT_Simbolo.ico")
 root.resizable(0,0)
 
