@@ -81,10 +81,10 @@ def codigoBoton():
 def check_errors():
     global valores
     
-    if (not(valores[i].isspace()) or (valores[i]=='')):
+    if ((valores[i].isspace()) or (valores[i]=='')):
         messagebox.showerror('VoIP Network Designer', 'Error: No ha introducido nada. Vuelva Atrás.')
     
-    if (not(valores[i].isalpha())):
+    if ((valores[i].isalpha())):
         messagebox.showerror('VoIP Network Designer', 'Error: La entrada no se esperaba alfanumérica. Vuelva Atrás')
         
         
