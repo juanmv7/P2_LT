@@ -86,7 +86,9 @@ def check_errors():
     
     if ((valores[i].isalpha())):
         messagebox.showerror('VoIP Network Designer', 'Error: La entrada no se esperaba alfanumérica. Vuelva Atrás')
-        
+      
+    if ((' ' in valores[i])):
+        messagebox.showerror('VoIP Network Designer', 'Error: La entrada no puede contener espacios. Vuelva Atrás')
         
 def conectar_server():
     global i, solucion
