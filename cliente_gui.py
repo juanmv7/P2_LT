@@ -13,8 +13,8 @@ import socket
 #VARIABLES GLOBALES
 i=0 #para iterar entre frames
 frames=[] #vector donde guardaremos los distintos frames o paginas del programa
-valores=[]
-cuadroTexto=[]
+valores=[] #vector donde guardaremos lo que le vamos a pasar al servidor
+cuadroTexto=[] #
 mensaje=["Introduzca el valor deseado del MOS:", "Introduzca el retardo requerido (ms):", "Introduzca el retardo de red (ms):", "    Introduzca el jitter total (ms):","Introduzca el número de clientes (Nc):" ,"Introduzca el numero de líneas \n por cliente (Nl):", "Introduzca el tiempo medio por \n llamada (Tpll)(Min):" ,"   Introduzca la probabilidad \n de bloqueo (%):","  Introduzca el ancho de banda \n de reserva (%):" ,"  Introduzca el ancho de banda \n requerido (bps):", "Indica si desea compresion cRTP  \n (Yes=1 No=0):","Introduzca el tipo de encapsulación:\n  - Ethernet --> 1\n  - Ethernet 802.1q --> 2\n  - Ethernet q-in-q --> 3\n  - PPPOE: --> 4\n  - PPPOE 802.1q: --> 5"]
 
 
