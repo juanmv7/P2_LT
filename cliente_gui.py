@@ -226,10 +226,10 @@ cuadroTexto.append(tk.Entry(frames[11]))
 cuadroTexto[11].config(justify=CENTER)
 cuadroTexto[11].place(x=125,y=105)
 
-botonEnviar=tk.Button(frames[11], text="Enviar", command=codigoBoton,font=("Comic Sans",10),fg="black",activebackground="#5ccb5f")
+botonEnviar=tk.Button(frames[11], text="Enviar", command=codigoBoton,font=("Comic Sans",10),fg="black",bg="lightblue",activebackground="#5ccb5f")
 botonEnviar.place(x=200,y=130)
     
-botonAtras=tk.Button(frames[11], text="Atras", command=retroceder_pagina,font=("Comic Sans",10),fg="black",activebackground="red")
+botonAtras=tk.Button(frames[11], text="Atras", command=retroceder_pagina,font=("Comic Sans",10),fg="black",bg="lightblue",activebackground="red")
 botonAtras.place(x=125,y=130)
 
 ####### FRAME 12 ######
