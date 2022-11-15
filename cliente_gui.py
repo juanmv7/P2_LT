@@ -57,7 +57,7 @@ def codigoBoton():
     valores.append(cuadroTexto[i].get())
 
     #  if(valores[i]!=''): #Control error con 0 y ""
-    Conectar_server()
+    conectar_server()
     frames[i].forget()
     i=i+1
     frames[i].pack(fill='both', expand=1) #mostramos el siguiente frame
@@ -71,7 +71,7 @@ def codigoBoton():
     #      miLabel2.place(x=80,y=80)
     #      valores.append(cuadroTexto[i].get())
         
-def Conectar_server():
+def conectar_server():
     global i, solucion
     # Programa Cliente
     # Creando un socket TCP/IP
@@ -81,7 +81,7 @@ def Conectar_server():
     server_address = ('localhost', 10800)
     print ('conectando a %s puerto %s' % server_address)
     sock.connect(server_address)
-    if(i<11):
+    if(i<11 or i==12):
 
         message=valores[i].encode('ascii')
         cabecera=(str(i)+'-')
@@ -118,6 +118,12 @@ def label_solucion(solucion):
     miLabel.place(x=100,y=40)
     miLabel2.place(x=250,y=20) 
     miLabel3.place(x=90,y=190)
+
+def enviar_correo():
+    global i
+
+    valores.append(cuadroTexto[i].get())
+    conectar_server()
      
 ########## CREACION VENTANA RAIZ #############
 
@@ -215,7 +221,7 @@ cuadroTexto[12].config(justify=CENTER)
 cuadroTexto[12].place(x=250,y=200)
 
 
-botonEnviar=tk.Button(frames[12], text="Enviar Correo", command=codigoBoton,font=("Comic Sans",10),fg="black",activebackground="#90CAF9")
+botonEnviar=tk.Button(frames[12], text="Enviar Correo", command=enviar_correo,font=("Comic Sans",10),fg="black",activebackground="#90CAF9")
 botonEnviar.place(x=325,y=225)
     
 botonAtras=tk.Button(frames[12], text="Atras", command=retroceder_pagina,font=("Comic Sans",10),fg="black",activebackground="red")

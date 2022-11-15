@@ -38,7 +38,7 @@ while True:
         data=message[1]
         if (i<12):
             datos_vector[i]=float(data)
-
+        
 
 
          #--------------------MOS--------------------------
@@ -51,8 +51,8 @@ while True:
             resultado_cte.append("0-"+str(MOS_elegido))
             resultado_cte.append("1-"+str(codec_elegido))
             
-        #Enviar al final datos como string separados por guiones cada dato, para luego separar en cliente
-        #--------------------calculado Retardo--------------------------
+        
+        #--------------------Retardo--------------------------
         if(i==3):
             ret_calculado, cumple=Back_end.calculo_retardo(posicion_codec,datos_vector[1],datos_vector[2],datos_vector[3])
             resultado=resultado+str(ret_calculado)+"-"+str(cumple)+"-"
@@ -60,12 +60,14 @@ while True:
             resultado_cte.append("2-"+str(ret_calculado))
             resultado_cte.append("3-"+str(cumple))
 
+        #--------------------Retardo--------------------------
         if(i==7):
             Nlineas=Back_end.Calculo_lineas_BHT(datos_vector[4],datos_vector[5],datos_vector[6],datos_vector[7]/100)
             resultado=resultado+str(Nlineas)+"-"
             
             resultado_cte.append("4-"+str(Nlineas))
 
+        #--------------------BW_S--------------------------
         if(i==11):
             BW_st, cumple=Back_end.Calculo_BWst(Nlineas,posicion_codec,datos_vector[8],datos_vector[9],int(datos_vector[10]),int(datos_vector[11]))
             resultado=resultado+str(BW_st)+"-"+str(cumple)
@@ -74,8 +76,10 @@ while True:
             resultado_cte.append("5-"+str(BW_st))
             resultado_cte.append("6-"+str(cumple))
             
+            #--------------------Envio_correo--------------------------
         if(i==12):
-            Back_end.Envio_correo_informe(datos_vector, resultado, datos_vector_cte, resultado_cte)
+            correo=data
+            Back_end.Envio_correo_informe(datos_vector, resultado, datos_vector_cte, resultado_cte,correo)
 
     finally:
         # Cerrando conexion
