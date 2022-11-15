@@ -88,6 +88,15 @@ def calculo_retardo(posicion_codec, retardo_pedido, retardo_red, jitter):
     return (ret_calculado, cumple)
 
 
+
+# @brief   Esta funcion calcula la probabilidad de bloqueo frente a los recursos 
+#          (lineas) y los Erlangs.
+# 
+# @param[in]  A             Erlangs
+# @param[in]  m             Número de lineas 
+# @param[out] Pb            Probabilidad de bloqueo
+#
+##   
 def erlang(A, m):
     L = (A ** m) / factorial(m)
     sum_ = 0

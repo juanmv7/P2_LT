@@ -1,2 +1,4 @@
-# P2_LT
-LAB DE TELEMATICA - P2
+
+# LAB DE TELEMATICA - P2
+
+En esta práctica vamos a crear un ...
