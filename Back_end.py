@@ -178,7 +178,7 @@ def Calculo_BWst(Nlineas, posicion_codec, BWres, BW_cliente, bool_cRTP, encapsul
     return(BW_st, cumple)
     
     
-def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte,correo): 
+def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte): 
     
     salidas = salidas.split("-")
     port = 587

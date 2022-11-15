@@ -15,14 +15,15 @@ i=0 #para iterar entre frames
 frames=[] #vector donde guardaremos los distintos frames o paginas del programa
 valores=[]
 cuadroTexto=[]
-mensaje=["Introduzca el valor deseado del MOS:", "Introduzca el retardo requerido (ms):", "Introduzca el retardo de red (ms):", "Introduzca el jitter total (ms):","Introduzca el número de clientes (Nc):" ,"Introduzca el numero de líneas \n por cliente (Nl):", "Introduzca el tiempo medio \n por llamada (Tpll)(Min):" ,"Introduzca la probabilidad \n de bloqueo (%):","Introduzca el ancho de banda \n de reserva (%):" ,"Introduzca el ancho de banda \n requerido (bps):", "Indica si desea compresion cRTP  \n (Yes=1 No=0):","Introduzca el tipo de encapsulación:\n  - Ethernet --> 1\n  - Ethernet 802.1q --> 2\n  - Ethernet q-in-q --> 3\n  - PPPOE: --> 4\n  - PPPOE 802.1q: --> 5"]
+mensaje=["Introduzca el valor deseado del MOS:", "Introduzca el retardo requerido (ms):", "Introduzca el retardo de red (ms):", "    Introduzca el jitter total (ms):","Introduzca el número de clientes (Nc):" ,"Introduzca el numero de líneas \n por cliente (Nl):", "Introduzca el tiempo medio por \n llamada (Tpll)(Min):" ,"   Introduzca la probabilidad \n de bloqueo (%):","  Introduzca el ancho de banda \n de reserva (%):" ,"  Introduzca el ancho de banda \n requerido (bps):", "Indica si desea compresion cRTP  \n (Yes=1 No=0):","Introduzca el tipo de encapsulación:\n  - Ethernet --> 1\n  - Ethernet 802.1q --> 2\n  - Ethernet q-in-q --> 3\n  - PPPOE: --> 4\n  - PPPOE 802.1q: --> 5"]
 
 
 
 #Crear y avanzar frame sera lo mismo. Esto implica que cada vez que volvamos atras, debemos volver a rellenar (y por tanto reecribir) el frame
 def crear_frame():
     global frames
-    frames.append(tk.Frame(root, width=400, height=200))
+    frames.append(tk.Frame(root, width=400, height=200,bg="lightblue"))
+
 
 #Al retroceder no se modifica el frame, pero luego al volver al avanzar si que tendremos que reescribirlo!
 def retroceder_pagina():
@@ -32,25 +33,29 @@ def retroceder_pagina():
     i=i-1 #iteramos
     frames[i].pack(fill='both', expand=1) #mostramos el siguiente frame
 
+
 def crear_boton(k):
     
-    botonEnviar=tk.Button(frames[k], text="Enviar", command=codigoBoton,font=("Comic Sans",10),fg="black",activebackground="#90CAF9")
-    botonEnviar.place(x=195,y=85)
+    botonEnviar=tk.Button(frames[k], text="Enviar", command=codigoBoton,font=("Comic Sans",10),fg="black",bg="lightblue",activebackground="#5ccb5f")
+    botonEnviar.place(x=205,y=85)
     if(k>0):
-        botonAtras=tk.Button(frames[k], text="Atras", command=retroceder_pagina,font=("Comic Sans",10),fg="black",activebackground="red")
-        botonAtras.place(x=120,y=85)
+        botonAtras=tk.Button(frames[k], text="Atras", command=retroceder_pagina,font=("Comic Sans",10),fg="black",bg="lightblue",activebackground="red")
+        botonAtras.place(x=130,y=85)
+
 
 def crear_etiqueta(k):
     global mensaje
-    miLabel=tk.Label(frames[k], text=mensaje[k], fg="blue")
+    miLabel=tk.Label(frames[k], text=mensaje[k], fg="blue",bg="lightblue")
     miLabel.place(x=100,y=10)
     
+
 def crear_entry(k):
     global cuadroTexto
     cuadroTexto.append(tk.Entry(frames[k]))
     cuadroTexto[k].config(justify=CENTER)
-    cuadroTexto[k].place(x=120,y=60)
-    
+    cuadroTexto[k].place(x=130,y=60)
+
+
 def codigoBoton():
     global i, frames, valores
      
@@ -70,7 +75,8 @@ def codigoBoton():
     #      miLabel2=tk.Label(frames[i], text="Valor incorrecto,introduzca otro",font=("Comic Sans",12), fg="red")
     #      miLabel2.place(x=80,y=80)
     #      valores.append(cuadroTexto[i].get())
-        
+
+    
 def conectar_server():
     global i, solucion
     # Programa Cliente
@@ -100,6 +106,7 @@ def conectar_server():
         
         sock.close()
 
+
 def label_solucion(solucion):
     
     solucion=solucion.split("-")
@@ -111,20 +118,25 @@ def label_solucion(solucion):
         solucion[6]="SI"
     solucion_Final="\n -El MOS elegido es: "+ solucion[0] + "\n -El Codec elegido es: " + solucion[1]+ "\n -El retardo calculado es: "+ solucion[2]+ " ms \n -El retardo requerido " + solucion[3]+ " cumple con las especificaciones del codec elegido" + "\n -El número de líneas es: "+ solucion[4]+ "\n-El ancho de banda resultante es: "+ solucion[5]+" bps \n-El ancho de banda pedido "+solucion[6]+" cumple con las especificaciones del codec elegido"
    
-    miLabel=tk.Label(frames[12], text=solucion_Final, fg="blue")
-    miLabel2=tk.Label(frames[12], text="Informe Resultados:", fg="black",font=("Comic Sans",12))
-    miLabel3=tk.Label(frames[12], text="Introduzca su correo para \n un informe más detallado:", fg="blue")
+    miLabel=tk.Label(frames[12], text=solucion_Final, fg="blue",bg="lightblue")
+    miLabel2=tk.Label(frames[12], text="Informe Resultados:", fg="black",bg="lightblue",font=("Comic Sans",12))
+    miLabel3=tk.Label(frames[12], text="Introduzca su correo para \n un informe más detallado:", fg="black",bg="lightblue")
     
     miLabel.place(x=100,y=40)
     miLabel2.place(x=250,y=20) 
     miLabel3.place(x=90,y=190)
+
 
 def enviar_correo():
     global i
 
     valores.append(cuadroTexto[i].get())
     conectar_server()
-     
+    miLabel4=tk.Label(frames[12], text="Se ha enviado el informe a su correo.", fg="green",bg="lightblue",font=("Comic Sans",10))
+    miLabel4.place(x=230,y=260)
+
+
+
 ########## CREACION VENTANA RAIZ #############
 
 root=tk.Tk() #creamos una varibale de instancia de la clase tk. Crea la ventana principal e inicia interpetre Tcl/Tk
@@ -207,24 +219,24 @@ cuadroTexto.append(tk.Entry(frames[11]))
 cuadroTexto[11].config(justify=CENTER)
 cuadroTexto[11].place(x=125,y=105)
 
-botonEnviar=tk.Button(frames[11], text="Enviar", command=codigoBoton,font=("Comic Sans",10),fg="black",activebackground="#90CAF9")
+botonEnviar=tk.Button(frames[11], text="Enviar", command=codigoBoton,font=("Comic Sans",10),fg="black",activebackground="#5ccb5f")
 botonEnviar.place(x=200,y=130)
     
 botonAtras=tk.Button(frames[11], text="Atras", command=retroceder_pagina,font=("Comic Sans",10),fg="black",activebackground="red")
 botonAtras.place(x=125,y=130)
 
 ####### FRAME 12 ######
-frames.append(tk.Frame(root, width=600, height=400))
+frames.append(tk.Frame(root, width=600, height=400,bg="lightblue"))
 
 cuadroTexto.append(tk.Entry(frames[12]))
 cuadroTexto[12].config(justify=CENTER)
 cuadroTexto[12].place(x=250,y=200)
 
 
-botonEnviar=tk.Button(frames[12], text="Enviar Correo", command=enviar_correo,font=("Comic Sans",10),fg="black",activebackground="#90CAF9")
+botonEnviar=tk.Button(frames[12], text="Enviar Correo", command=enviar_correo,font=("Comic Sans",10),fg="black",bg="lightblue",activebackground="#5ccb5f")
 botonEnviar.place(x=325,y=225)
     
-botonAtras=tk.Button(frames[12], text="Atras", command=retroceder_pagina,font=("Comic Sans",10),fg="black",activebackground="red")
+botonAtras=tk.Button(frames[12], text="Atras", command=retroceder_pagina,font=("Comic Sans",10),fg="black",bg="lightblue",activebackground="red")
 botonAtras.place(x=245,y=225)
 
 # MAIN LOOP (FINAL)

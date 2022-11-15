@@ -78,9 +78,9 @@ while True:
             
             #--------------------Envio_correo--------------------------
         if(i==12):
-            correo=data
-            Back_end.Envio_correo_informe(datos_vector, resultado, datos_vector_cte, resultado_cte,correo)
-
+            
+            Back_end.Envio_correo_informe(datos_vector, resultado, datos_vector_cte, resultado_cte)
+            
     finally:
         # Cerrando conexion
         connection.close()
