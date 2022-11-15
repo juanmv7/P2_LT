@@ -119,13 +119,11 @@ def label_solucion(solucion):
     solucion_Final="\n -El MOS elegido es: "+ solucion[0] + "\n -El Codec elegido es: " + solucion[1]+ "\n -El retardo calculado es: "+ solucion[2]+ " ms \n -El retardo requerido " + solucion[3]+ " cumple con las especificaciones del codec elegido" + "\n -El número de líneas es: "+ solucion[4]+ "\n-El ancho de banda resultante es: "+ solucion[5]+" bps \n-El ancho de banda pedido "+solucion[6]+" cumple con las especificaciones del codec elegido"
    
     miLabel=tk.Label(frames[12], text=solucion_Final, fg="blue",bg="lightblue")
-    miLabel2=tk.Label(frames[12], text="Informe Resultados:", fg="black",bg="lightblue",font=("Comic Sans",12))
+    miLabel2=tk.Label(frames[12], text="Informe Resultados:", fg="black",bg="lightblue",font=("Comic Sans",12,"bold"))
     miLabel3=tk.Label(frames[12], text="Introduzca su correo para \n un informe más detallado:", fg="black",bg="lightblue")
-    
     miLabel.place(x=100,y=40)
     miLabel2.place(x=250,y=20) 
     miLabel3.place(x=90,y=190)
-
 
 def enviar_correo():
     global i
