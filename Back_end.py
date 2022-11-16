@@ -202,10 +202,11 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
 #"Indica si desea compresion cRTP  \n (Yes=1 No=0):"#10
 #"Introduzca el tipo de encapsulación:"]#11##
 
-    #port = 587
-    #smtp_server = "correo.ugr.es"
-    #sender_email = ""
-    #receiver_email = entradas[12]
+    port = 587
+    smtp_server = "correo.ugr.es"
+    sender_email = "pablorofu@correo.ugr.es"
+    receiver_email = "pablito4292@gmail.com" #entradas[12]
+    password=input("Escribe el password de tu correo ugr: \n")
 
 
     j=0
@@ -228,13 +229,15 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     cabeceras_de_entradas=[]
     
     
-    entradas_cte=["0-23","0-23","0-23","3-45"]
-    for z in range(0,len(entradas_cte)):
+    entradas_cte=["0-23","0-23","0-23","9-1","1-2","2-3","3-4","4-5","5-800","6-132","7-12345","8-1","9-2","10-True","11-1","11-5","10-False"]
+    #le quitamos los guiones a la lista entradas_cte
+    for z in range(0,len(entradas_cte)):#NO HACE FALTA PONER -1, YA LO HACE RANGE
         entradas_sin_guiones.append(entradas_cte[z].split("-"))
+    #una vez quitamos los guiones tenemos una lista en la que cada componente es una lista
     for j in range(0,len(entradas_sin_guiones)):
-        cabeceras_de_entradas.append(entradas_sin_guiones[j][0])
+        cabeceras_de_entradas.append(entradas_sin_guiones[j][0]) #recorremos las diferentes componentes de la lista entradas_sin_guiones y en cada componente hay 2 componentes que son la cabecera y el contenido del mensaje
         entradas_sin_cabecera.append(entradas_sin_guiones[j][1])
-    for k in range(0,len(cabeceras_de_entradas)):
+    for k in range(0,len(cabeceras_de_entradas)):#identificamos las cabeceras para saber de qué mensaje se trata
         if(cabeceras_de_entradas[k]=='0'):
             MOS.append(entradas_sin_cabecera[k]) #introduce entradas_sin_cabecera[k] en la siguiente posición de MOS
         elif(cabeceras_de_entradas[k]=='1'):
@@ -255,22 +258,88 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
             banda_reserva.append(entradas_sin_cabecera[k])
         elif(cabeceras_de_entradas[k]=='9'):
             banda_requerido.append(entradas_sin_cabecera[k])
-        elif(cabeceras_de_entradas[k]=='10'):
-            cRTP.append(entradas_sin_cabecera[k])
-        elif(cabeceras_de_entradas[k]=='11'):
-            encapsulacion.append(entradas_sin_cabecera[k])
-    print(entradas_sin_cabecera)
-    print(entradas_sin_guiones)
-    for i in range(0,len(MOS)):
-        MOS[i]=int(MOS[i]) #pasamos de una lista de str a una lista de int
-    MOS=str(MOS) #luego pasamos de lista a str
+        elif(cabeceras_de_entradas[k]=='10'):#cRTP
+            if(entradas_sin_cabecera[k]=='True'):
+                cRTP.append('con cRTP')
+            else:
+                cRTP.append('sin cRTP')
+        elif(cabeceras_de_entradas[k]=='11'):#encapsulacion
+            if(entradas_sin_cabecera[k]=='1'):
+                encapsulacion.append('Ethernet')
+            elif(entradas_sin_cabecera[k]=='2'):
+                encapsulacion.append('Ethernet 802.1q')
+            elif(entradas_sin_cabecera[k]=='3'):
+                encapsulacion.append('Ethernet q-in-q')
+            elif(entradas_sin_cabecera[k]=='4'):
+                encapsulacion.append('PPPOE')
+            elif(entradas_sin_cabecera[k]=='5'):
+                encapsulacion.append('PPPOE 802.1q')
 
-    #password = 
+    """for i in range(0,len(MOS)): 
+        MOS[i]=int(MOS[i]) #pasamos de una lista en la que cada componente es un str a una lista en la que cada componente es un int
+    MOS=str(MOS) #luego pasamos de lista a str"""
+    
+    #tenemos una lista cuyas componentes son listas, cada componente de cada lista se va a transformar a enteros, y una vez tenemos una lista con enteros, transformamos la lista de enteros en un str de enteros porque el mensaje solo admite str
+    vector=[MOS,retardo,retardo_red,jitter,nc,nl,tpll,pb,banda_reserva,banda_requerido]
+    for i in range(0,len(vector)):
+        for j in range(0,len(vector[i])):
+            vector[i][j]=int(vector[i][j])
+        vector[i]=str(vector[i])
+    
+    MOS_elegido=[]
+    codec_elegido=[]
+    ret_calculado=[]
+    cumple_ret=[]
+    Nlineas=[]
+    Bw_st=[]
+    cumple_Bw=[]
+    salidas_sin_guiones=[]
+    cabeceras_de_salidas=[]
+    salidas_sin_cabecera=[]
+    
+        
+    salidas_cte=["0-23","0-1234","1-G711","2-475849","3-True","3-False","4-938387473","5-2372732","6-False","6-True"]
+    for z in range(0,len(salidas_cte)):#NO HACE FALTA PONER -1, YA LO HACE RANGE
+        salidas_sin_guiones.append(salidas_cte[z].split("-"))
+    for j in range(0,len(salidas_sin_guiones)):
+        cabeceras_de_salidas.append(salidas_sin_guiones[j][0])
+        salidas_sin_cabecera.append(salidas_sin_guiones[j][1])
+    for k in range(0,len(cabeceras_de_salidas)):
+        if(cabeceras_de_salidas[k]=='0'):
+            MOS_elegido.append(salidas_sin_cabecera[k]) #introduce entradas_sin_cabecera[k] en la siguiente posición de MOS
+        elif(cabeceras_de_salidas[k]=='1'):
+            codec_elegido.append(salidas_sin_cabecera[k])
+        elif(cabeceras_de_salidas[k]=='2'):
+            ret_calculado.append(salidas_sin_cabecera[k])
+        elif(cabeceras_de_salidas[k]=='3'):
+            if(salidas_sin_cabecera[k]=='True'):
+                cumple_ret.append('cumple con el retardo')
+            else:
+                cumple_ret.append('no cumple con el retardo')
+        elif(cabeceras_de_salidas[k]=='4'):
+            Nlineas.append(salidas_sin_cabecera[k])
+        elif(cabeceras_de_salidas[k]=='5'):
+            Bw_st.append(salidas_sin_cabecera[k])
+        elif(cabeceras_de_salidas[k]=='6'):
+            if(salidas_sin_cabecera[k]=='True'):
+                cumple_Bw.append('cumple con el ancho')
+            else:
+                cumple_Bw.append('no cumple con el ancho')
+            
+    vector2=[MOS_elegido,ret_calculado,Nlineas,Bw_st]
+    for i in range(0,len(vector2)):
+        for j in range(0,len(vector2[i])):
+            vector2[i][j]=int(vector2[i][j])
+        vector2[i]=str(vector2[i])
 
+
+#- Ethernet --> 1\n  
+#- Ethernet 802.1q --> 2\n  
+#- Ethernet q-in-q --> 3\n  
+#- PPPOE: --> 4\n  
+#- PPPOE 802.1q: --> 5"]
 
     #Mensaje
-    
-    receiver_email='pp'
 
     message = """
     
@@ -278,8 +347,69 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     TO: """ + receiver_email + """
     Subject: Informe Final 
     
-    MOS: """+MOS+""""
+    AQUÍ TENEMOS LOS DATOS QUE USTED HA INTRODUCIDO:
+    
+    MOS: """+vector[0]+"""
+    RETARDO REQUERIDO: """+vector[1]+""" ms
+    RETARDO DE RED: """+vector[2]+""" ms
+    JITTER: """+vector[3]+"""" ms
+    Nº DE CLIENTES: """+vector[4]+""" clientes
+    Nº DE LINEAS POR CLIENTE: """+vector[5]+"""
+    TIEMPO MEDIO POR LLAMADA: """+vector[6]+""" mins
+    PROB. DE BLOQUEO: """+vector[7]+""" %
+    ANCHO DE BANDA DE RESERVA: """+vector[8]+""" %
+    ANCHO DE BANDA REQUERIDO: """+vector[9]+""" bps
+    COMPRESION cRTP: """+str(cRTP)+"""
+    TIPO DE ENCAPSULACION: """+str(encapsulacion)+"""
+    
+    AQUÍ ESTÁN LAS DIFERENTES SALIDAS QUE HEMOS OBTENIDO:
+        
+    MOS ELEGIDO: """ +vector2[0]+ """
+    CODEC ELEGIDO: """ +str(codec_elegido)+ """
+    RETARDO CALCULADO: """ +vector2[1]+ """
+    CUMPLE RETARDO: """ +str(cumple_ret)+ """
+    Nº LINEAS FINALES: """ +vector2[2]+ """
+    ANCHO DE BANDA CALCULADO: """ +vector2[3]+ """
+    CUMPLE ANCHO DE BANDA: """ +str(cumple_Bw)+ """
+                
 
     **************************************************************
+    
+    LOS DATOS FINALES QUE HEMOS UTILIZADO PARA LOS CÁLCULOS SON:
         
-    """     
+    MOS: """+str(MOS[len(MOS)-1])+"""
+    RETARDO REQUERIDO: """+str(retardo[len(retardo)-1])+""" ms
+    RETARDO DE RED: """+str(retardo_red[len(retardo_red)-1])+""" ms
+    JITTER: """+str(jitter[len(jitter)-1])+""" ms
+    Nº DE CLIENTES: """+str(nc[len(nc)-1])+""" clientes
+    Nº DE LINEAS POR CLIENTE: """+str(nl[len(nl)-1])+"""
+    TIEMPO MEDIO POR LLAMADA: """+str(tpll[len(tpll)-1])+""" mins
+    PROB. DE BLOQUEO: """+str(pb[len(pb)-1])+""" %
+    ANCHO DE BANDA DE RESERVA: """+str(banda_reserva[len(banda_reserva)-1])+""" %
+    ANCHO DE BANDA REQUERIDO: """+str(banda_requerido[len(banda_requerido)-1])+""" bps
+    COMPRESION cRTP: """+str(cRTP[len(cRTP)-1])+"""
+    TIPO DE ENCAPSULACION: """+str(encapsulacion[len(encapsulacion)-1])+"""
+  
+    LAS SALIDAS FINALES SON:
+
+    MOS ELEGIDO: """ +str(MOS_elegido[len(MOS_elegido)-1])+ """
+    CODEC ELEGIDO: """ +str(codec_elegido[len(codec_elegido)-1])+ """
+    RETARDO CALCULADO: """ +str(ret_calculado[len(ret_calculado)-1])+ """ ms
+    CUMPLE RETARDO: """ +str(cumple_ret[len(cumple_ret)-1])+ """
+    Nº LINEAS FINALES: """ +str(Nlineas[len(Nlineas)-1])+ """
+    ANCHO DE BANDA CALCULADO: """ +str(Bw_st[len(Bw_st)-1])+ """ bps
+    CUMPLE ANCHO DE BANDA: """ +str(cumple_Bw[len(cumple_Bw)-1])+ """
+    
+    **************************************************************
+      
+    """ 
+
+    print(message)
+
+    with smtplib.SMTP(smtp_server,port) as server:
+        server.ehlo()
+        server.starttls()
+        server.ehlo()
+        server.login(sender_email,password)
+        server.sendmail(sender_email,receiver_email,message)
+        server.close()
