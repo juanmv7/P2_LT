@@ -191,14 +191,14 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     
 #"Introduzca el valor deseado del MOS:"0
 #"Introduzca el retardo requerido (ms):"#1
-##"Introduzca el retardo de red (ms):"#2
+#"Introduzca el retardo de red (ms):"#2
 #"Introduzca el jitter total (ms):"#3
 #"Introduzca el número de clientes (Nc):"#4
 #"Introduzca el numero de líneas \n por cliente (Nl):"#5
 #"Introduzca el tiempo medio por \n llamada (Tpll)(Min):"#6
-#"   Introduzca la probabilidad \n de bloqueo (%):"#7
-#"  Introduzca el ancho de banda \n de reserva (%):"#8
-#"  Introduzca el ancho de banda \n requerido (bps):"#9
+#"Introduzca la probabilidad \n de bloqueo (%):"#7
+#"Introduzca el ancho de banda \n de reserva (%):"#8
+#"Introduzca el ancho de banda \n requerido (bps):"#9
 #"Indica si desea compresion cRTP  \n (Yes=1 No=0):"#10
 #"Introduzca el tipo de encapsulación:"]#11##
 
@@ -229,7 +229,7 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     cabeceras_de_entradas=[]
     
     
-    #entradas_cte=["0-23","0-23","0-23","9-1","1-2","2-3","3-4","4-5","5-800","6-132","7-12345","8-1","9-2","10-True","11-1","11-5","10-False"]
+    
     #le quitamos los guiones a la lista entradas_cte
     for z in range(0,len(entradas_cte)):#NO HACE FALTA PONER -1, YA LO HACE RANGE
         entradas_sin_guiones.append(entradas_cte[z].split("-"))
@@ -298,7 +298,7 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     salidas_sin_cabecera=[]
     
         
-    #salidas_cte=["0-23","0-1234","1-G711","2-475849","3-True","3-False","4-938387473","5-2372732","6-False","6-True"]
+    
     for z in range(0,len(salidas_cte)):#NO HACE FALTA PONER -1, YA LO HACE RANGE
         salidas_sin_guiones.append(salidas_cte[z].split("-"))
     for j in range(0,len(salidas_sin_guiones)):
@@ -353,10 +353,10 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     RETARDO REQUERIDO: """+vector[1]+""" ms
     RETARDO DE RED: """+vector[2]+""" ms
     JITTER: """+vector[3]+"""" ms
-    Nº DE CLIENTES: """+vector[4]+""" clientes
-    Nº DE LINEAS POR CLIENTE: """+vector[5]+"""
+    NUMERO DE CLIENTES: """+vector[4]+""" clientes
+    NUMERO DE LINEAS POR CLIENTE: """+vector[5]+"""
     TIEMPO MEDIO POR LLAMADA: """+vector[6]+""" mins
-    PROB. DE BLOQUEO: """+vector[7]+""" %
+    PROB. DE BLOQUEO: """+vector[7]+""" porcentaje
     ANCHO DE BANDA DE RESERVA: """+vector[8]+""" porcentaje
     ANCHO DE BANDA REQUERIDO: """+vector[9]+""" bps
     COMPRESION cRTP: """+str(cRTP)+"""
@@ -366,10 +366,10 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
         
     MOS ELEGIDO: """ +vector2[0]+ """
     CODEC ELEGIDO: """ +str(codec_elegido)+ """
-    RETARDO CALCULADO: """ +vector2[1]+ """
+    RETARDO CALCULADO: """ +vector2[1]+ """ ms
     CUMPLE RETARDO: """ +str(cumple_ret)+ """
-    NUMERO DE LINEAS FINALES: """ +vector2[2]+ """
-    ANCHO DE BANDA CALCULADO: """ +vector2[3]+ """
+    NUMERO DE LINEAS FINALES: """ +vector2[2]+ """ lineas
+    ANCHO DE BANDA CALCULADO: """ +vector2[3]+ """ bps
     CUMPLE ANCHO DE BANDA: """ +str(cumple_Bw)+ """
                 
 
@@ -384,7 +384,7 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     NUMERO DE CLIENTES: """+str(nc[len(nc)-1])+""" clientes
     NUMERO DE LINEAS POR CLIENTE: """+str(nl[len(nl)-1])+"""
     TIEMPO MEDIO POR LLAMADA: """+str(tpll[len(tpll)-1])+""" mins
-    PROB. DE BLOQUEO: """+str(pb[len(pb)-1])+""" %
+    PROB. DE BLOQUEO: """+str(pb[len(pb)-1])+""" porcentaje
     ANCHO DE BANDA DE RESERVA: """+str(banda_reserva[len(banda_reserva)-1])+""" porcentaje
     ANCHO DE BANDA REQUERIDO: """+str(banda_requerido[len(banda_requerido)-1])+""" bps
     COMPRESION cRTP: """+str(cRTP[len(cRTP)-1])+"""
@@ -396,7 +396,7 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     CODEC ELEGIDO: """ +str(codec_elegido[len(codec_elegido)-1])+ """
     RETARDO CALCULADO: """ +str(ret_calculado[len(ret_calculado)-1])+ """ ms
     CUMPLE RETARDO: """ +str(cumple_ret[len(cumple_ret)-1])+ """
-    Nº LINEAS FINALES: """ +str(Nlineas[len(Nlineas)-1])+ """
+    NUMERO LINEAS FINALES: """ +str(Nlineas[len(Nlineas)-1])+ """ lineas
     ANCHO DE BANDA CALCULADO: """ +str(Bw_st[len(Bw_st)-1])+ """ bps
     CUMPLE ANCHO DE BANDA: """ +str(cumple_Bw[len(cumple_Bw)-1])+ """
     
