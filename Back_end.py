@@ -347,7 +347,7 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     TO: """ + receiver_email + """
     Subject: Informe Final 
     
-    AQUÍ TENEMOS LOS DATOS QUE USTED HA INTRODUCIDO:
+    AQUI TENEMOS LOS DATOS QUE USTED HA INTRODUCIDO:
     
     MOS: """+vector[0]+"""
     RETARDO REQUERIDO: """+vector[1]+""" ms
@@ -362,7 +362,7 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     COMPRESION cRTP: """+str(cRTP)+"""
     TIPO DE ENCAPSULACION: """+str(encapsulacion)+"""
     
-    AQUÍ ESTÁN LAS DIFERENTES SALIDAS QUE HEMOS OBTENIDO:
+    AQUI ESTAN LAS DIFERENTES SALIDAS QUE HEMOS OBTENIDO:
         
     MOS ELEGIDO: """ +vector2[0]+ """
     CODEC ELEGIDO: """ +str(codec_elegido)+ """
@@ -375,7 +375,7 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
 
     **************************************************************
     
-    LOS DATOS FINALES QUE HEMOS UTILIZADO PARA LOS CÁLCULOS SON:
+    LOS DATOS FINALES QUE HEMOS UTILIZADO PARA LOS CALCULOS SON:
         
     MOS: """+str(MOS[len(MOS)-1])+"""
     RETARDO REQUERIDO: """+str(retardo[len(retardo)-1])+""" ms
