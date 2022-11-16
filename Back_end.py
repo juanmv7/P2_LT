@@ -212,18 +212,6 @@ def Calculo_BWst(Nlineas, posicion_codec, BWres, BW_cliente, bool_cRTP, encapsul
   
 def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte): 
     
-#"Introduzca el valor deseado del MOS:"0
-#"Introduzca el retardo requerido (ms):"#1
-#"Introduzca el retardo de red (ms):"#2
-#"Introduzca el jitter total (ms):"#3
-#"Introduzca el número de clientes (Nc):"#4
-#"Introduzca el numero de líneas \n por cliente (Nl):"#5
-#"Introduzca el tiempo medio por \n llamada (Tpll)(Min):"#6
-#"Introduzca la probabilidad \n de bloqueo (%):"#7
-#"Introduzca el ancho de banda \n de reserva (%):"#8
-#"Introduzca el ancho de banda \n requerido (bps):"#9
-#"Indica si desea compresion cRTP  \n (Yes=1 No=0):"#10
-#"Introduzca el tipo de encapsulación:"]#11##
 
     port = 587
     smtp_server = "correo.ugr.es"
@@ -356,13 +344,6 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
         vector2[i]=str(vector2[i])
 
 
-#- Ethernet --> 1\n  
-#- Ethernet 802.1q --> 2\n  
-#- Ethernet q-in-q --> 3\n  
-#- PPPOE: --> 4\n  
-#- PPPOE 802.1q: --> 5"]
-
-    #Mensaje
 
     message = """
     
