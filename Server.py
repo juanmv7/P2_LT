@@ -8,7 +8,7 @@ datos_vector=[0,0,0,0,0,0,0,0,0,0,0,0,0] #datos_vector: Vector que inicializamos
 datos_vector_cte = [] #datos_vector_cte: Vector que se llenará de todos los datos introducidos por el cliente, será un registro.
 resultado_cte = [] #resultado_cte: Vector con todos los resultados con los que pruebe el cliente.
 resultado="" #resultado: Resultado final calculado a a partir de los datos finales.
-bucle=True #
+bucle=True #Bucle que cuando se envia un correo se sale
 
 # Se crea el socket TCP/IP
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
