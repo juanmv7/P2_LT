@@ -8,7 +8,7 @@ datos_vector=[0,0,0,0,0,0,0,0,0,0,0,0,0] #datos_vector: Vector que inicializamos
 datos_vector_cte = [] #datos_vector_cte: Vector que se llenará de todos los datos introducidos por el cliente, será un registro.
 resultado_cte = [] #resultado_cte: Vector con todos los resultados con los que pruebe el cliente.
 resultado="" #resultado: Resultado final calculado a a partir de los datos finales.
-
+blucle=True
 
 # Se crea el socket TCP/IP
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -22,7 +22,7 @@ sock.bind(server_address)
 sock.listen()
 
 
-while True:
+while bucle:
     # Esperando conexión
     print ('Esperando para conectarse') #Mensaje que nos indica en el terminal que está esperando comunicación
     connection, client_address = sock.accept()
@@ -107,7 +107,9 @@ while True:
             datos_vector[i]=data 
 
             Back_end.Envio_correo_informe(datos_vector, resultado, datos_vector_cte, resultado_cte)
-            
+            bucle=False
+        
+        
     finally:
         # Cerrando conexión entre servidor y cliente
         connection.close()

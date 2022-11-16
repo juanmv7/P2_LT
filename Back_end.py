@@ -192,32 +192,36 @@ def Calculo_BWst(Nlineas, posicion_codec, BWres, BW_cliente, bool_cRTP, encapsul
 #        a partir del tipo de encapsulacion y del uso de cRTP o no. Además compara
 #        con el BW introducido por el cliente y si cumple o no con este.
 # 
-# @param[in]  Nlineas              Numero de llamadas
-# @param[in]  posicion_codec       Posicion del codec en TABLA
-# @param[in]  BWres                Ancho de banda de reserva (en porcentaje)
-# @param[in]  BW_cliente           Ancho de banda introducido por el cliente
-# @param[in]  encapsulacion        Tipo de encapsulacion de los paquetes 
-#                                       - Ethernet: 1
-#                                       - Ethernet 802.1q: 2
-#                                       - Ethernet q-in-q: 3
-#                                       - PPPOE: 4
-#                                       - PPPOE 802.1q: 5
-# @param[in]  bool_cRTP            Indica si se va a hacer compresión RTP
-# @param[out] BW_st                Ancho de banda resultante
-# @param[out] Cumple                Indica si el ancho de banda cumple con el introducido por el cliente
-##       
+# @param[in]  entradas              Es una lista de los últimos valores de entrada 
+#                                   en la que cada componente 
+#                                   son dos valores separados por guiones,
+#                                   estos valores son la cabecera y el valor del parámetro de entrada
+# @param[in]  salidas               Es una lista de los últimos valores de salida
+#                                   en la que cada componente 
+#                                   son dos valores separados por guiones,
+#                                   estos valores son la cabecera y el valor del parámetro de salida
+# @param[in]  entradas_cte          Es una lista de todos los valores de entrada que se han introducido.
+#                                   En esta lista cada componente
+#                                   son dos valores separados por guiones,
+#                                   estos valores son la cabecera y el valor del parámetro de entrada
+# @param[in]  salidas_cte           Es una lista de todos los valores de salida que se han calculado.
+#                                   En esta lista cada componente
+#                                   son dos valores separados por guiones,
+#                                   estos valores son la cabecera y el valor del parámetro de salida
+##     
+  
 def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte): 
     
 #"Introduzca el valor deseado del MOS:"0
 #"Introduzca el retardo requerido (ms):"#1
-##"Introduzca el retardo de red (ms):"#2
+#"Introduzca el retardo de red (ms):"#2
 #"Introduzca el jitter total (ms):"#3
 #"Introduzca el número de clientes (Nc):"#4
 #"Introduzca el numero de líneas \n por cliente (Nl):"#5
 #"Introduzca el tiempo medio por \n llamada (Tpll)(Min):"#6
-#"   Introduzca la probabilidad \n de bloqueo (%):"#7
-#"  Introduzca el ancho de banda \n de reserva (%):"#8
-#"  Introduzca el ancho de banda \n requerido (bps):"#9
+#"Introduzca la probabilidad \n de bloqueo (%):"#7
+#"Introduzca el ancho de banda \n de reserva (%):"#8
+#"Introduzca el ancho de banda \n requerido (bps):"#9
 #"Indica si desea compresion cRTP  \n (Yes=1 No=0):"#10
 #"Introduzca el tipo de encapsulación:"]#11##
 
@@ -248,7 +252,7 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     cabeceras_de_entradas=[]
     
     
-    #entradas_cte=["0-23","0-23","0-23","9-1","1-2","2-3","3-4","4-5","5-800","6-132","7-12345","8-1","9-2","10-True","11-1","11-5","10-False"]
+    
     #le quitamos los guiones a la lista entradas_cte
     for z in range(0,len(entradas_cte)):#NO HACE FALTA PONER -1, YA LO HACE RANGE
         entradas_sin_guiones.append(entradas_cte[z].split("-"))
@@ -302,7 +306,7 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     vector=[MOS,retardo,retardo_red,jitter,nc,nl,tpll,pb,banda_reserva,banda_requerido]
     for i in range(0,len(vector)):
         for j in range(0,len(vector[i])):
-            vector[i][j]=int(vector[i][j])
+            vector[i][j]=float(vector[i][j])
         vector[i]=str(vector[i])
     
     MOS_elegido=[]
@@ -317,7 +321,7 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     salidas_sin_cabecera=[]
     
         
-    #salidas_cte=["0-23","0-1234","1-G711","2-475849","3-True","3-False","4-938387473","5-2372732","6-False","6-True"]
+    
     for z in range(0,len(salidas_cte)):#NO HACE FALTA PONER -1, YA LO HACE RANGE
         salidas_sin_guiones.append(salidas_cte[z].split("-"))
     for j in range(0,len(salidas_sin_guiones)):
@@ -348,7 +352,7 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     vector2=[MOS_elegido,ret_calculado,Nlineas,Bw_st]
     for i in range(0,len(vector2)):
         for j in range(0,len(vector2[i])):
-            vector2[i][j]=int(vector2[i][j])
+            vector2[i][j]=float(vector2[i][j])
         vector2[i]=str(vector2[i])
 
 
@@ -366,37 +370,46 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     TO: """ + receiver_email + """
     Subject: Informe Final 
     
+    
+    
+    **************************************************************
+    
     AQUI TENEMOS LOS DATOS QUE USTED HA INTRODUCIDO:
     
-    
+    Estos datos reflejan una lista de los diferentes valores que ha ido introduciendo.
     
     MOS: """+vector[0]+"""
     RETARDO REQUERIDO: """+vector[1]+""" ms
     RETARDO DE RED: """+vector[2]+""" ms
     JITTER: """+vector[3]+"""" ms
-    Nº DE CLIENTES: """+vector[4]+""" clientes
-    Nº DE LINEAS POR CLIENTE: """+vector[5]+"""
+    NUMERO DE CLIENTES: """+vector[4]+""" clientes
+    NUMERO DE LINEAS POR CLIENTE: """+vector[5]+""" lineas
     TIEMPO MEDIO POR LLAMADA: """+vector[6]+""" mins
-    PROB. DE BLOQUEO: """+vector[7]+""" %
+    PROB. DE BLOQUEO: """+vector[7]+""" porcentaje
     ANCHO DE BANDA DE RESERVA: """+vector[8]+""" porcentaje
     ANCHO DE BANDA REQUERIDO: """+vector[9]+""" bps
     COMPRESION cRTP: """+str(cRTP)+"""
     TIPO DE ENCAPSULACION: """+str(encapsulacion)+"""
     
     AQUI ESTAN LAS DIFERENTES SALIDAS QUE HEMOS OBTENIDO:
+
+    Estos datos reflejan una lista de las diferentes salidas
+    que se han calculado a partir de todos los datos introducidos.
         
     MOS ELEGIDO: """ +vector2[0]+ """
     CODEC ELEGIDO: """ +str(codec_elegido)+ """
-    RETARDO CALCULADO: """ +vector2[1]+ """
+    RETARDO CALCULADO: """ +vector2[1]+ """ ms
     CUMPLE RETARDO: """ +str(cumple_ret)+ """
-    NUMERO DE LINEAS FINALES: """ +vector2[2]+ """
-    ANCHO DE BANDA CALCULADO: """ +vector2[3]+ """
+    NUMERO DE LINEAS FINALES: """ +vector2[2]+ """ lineas
+    ANCHO DE BANDA CALCULADO: """ +vector2[3]+ """ bps
     CUMPLE ANCHO DE BANDA: """ +str(cumple_Bw)+ """
                 
 
     **************************************************************
     
     LOS DATOS FINALES QUE HEMOS UTILIZADO PARA LOS CALCULOS SON:
+        
+    Estos datos reflejan los últimos valores que ha introducido.
         
     MOS: """+str(MOS[len(MOS)-1])+"""
     RETARDO REQUERIDO: """+str(retardo[len(retardo)-1])+""" ms
@@ -405,19 +418,21 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     NUMERO DE CLIENTES: """+str(nc[len(nc)-1])+""" clientes
     NUMERO DE LINEAS POR CLIENTE: """+str(nl[len(nl)-1])+"""
     TIEMPO MEDIO POR LLAMADA: """+str(tpll[len(tpll)-1])+""" mins
-    PROB. DE BLOQUEO: """+str(pb[len(pb)-1])+""" %
+    PROB. DE BLOQUEO: """+str(pb[len(pb)-1])+""" porcentaje
     ANCHO DE BANDA DE RESERVA: """+str(banda_reserva[len(banda_reserva)-1])+""" porcentaje
     ANCHO DE BANDA REQUERIDO: """+str(banda_requerido[len(banda_requerido)-1])+""" bps
     COMPRESION cRTP: """+str(cRTP[len(cRTP)-1])+"""
     TIPO DE ENCAPSULACION: """+str(encapsulacion[len(encapsulacion)-1])+"""
   
     LAS SALIDAS FINALES SON:
+        
+    Esta es la configuración final para su comunicación.
 
     MOS ELEGIDO: """ +str(MOS_elegido[len(MOS_elegido)-1])+ """
     CODEC ELEGIDO: """ +str(codec_elegido[len(codec_elegido)-1])+ """
     RETARDO CALCULADO: """ +str(ret_calculado[len(ret_calculado)-1])+ """ ms
     CUMPLE RETARDO: """ +str(cumple_ret[len(cumple_ret)-1])+ """
-    Nº LINEAS FINALES: """ +str(Nlineas[len(Nlineas)-1])+ """
+    NUMERO LINEAS FINALES: """ +str(Nlineas[len(Nlineas)-1])+ """ lineas
     ANCHO DE BANDA CALCULADO: """ +str(Bw_st[len(Bw_st)-1])+ """ bps
     CUMPLE ANCHO DE BANDA: """ +str(cumple_Bw[len(cumple_Bw)-1])+ """
     
