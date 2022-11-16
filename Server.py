@@ -107,7 +107,9 @@ while True:
             datos_vector[i]=data 
 
             Back_end.Envio_correo_informe(datos_vector, resultado, datos_vector_cte, resultado_cte)
-            
+    
+        
+        
     finally:
         # Cerrando conexión entre servidor y cliente
         connection.close()

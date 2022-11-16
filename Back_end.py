@@ -283,7 +283,7 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     vector=[MOS,retardo,retardo_red,jitter,nc,nl,tpll,pb,banda_reserva,banda_requerido]
     for i in range(0,len(vector)):
         for j in range(0,len(vector[i])):
-            vector[i][j]=int(vector[i][j])
+            vector[i][j]=float(vector[i][j])
         vector[i]=str(vector[i])
     
     MOS_elegido=[]
@@ -329,7 +329,7 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     vector2=[MOS_elegido,ret_calculado,Nlineas,Bw_st]
     for i in range(0,len(vector2)):
         for j in range(0,len(vector2[i])):
-            vector2[i][j]=int(vector2[i][j])
+            vector2[i][j]=float(vector2[i][j])
         vector2[i]=str(vector2[i])
 
 
