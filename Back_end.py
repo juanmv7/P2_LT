@@ -368,7 +368,7 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     CODEC ELEGIDO: """ +str(codec_elegido)+ """
     RETARDO CALCULADO: """ +vector2[1]+ """
     CUMPLE RETARDO: """ +str(cumple_ret)+ """
-    Nº LINEAS FINALES: """ +vector2[2]+ """
+    NUMERO DE LINEAS FINALES: """ +vector2[2]+ """
     ANCHO DE BANDA CALCULADO: """ +vector2[3]+ """
     CUMPLE ANCHO DE BANDA: """ +str(cumple_Bw)+ """
                 
@@ -381,8 +381,8 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     RETARDO REQUERIDO: """+str(retardo[len(retardo)-1])+""" ms
     RETARDO DE RED: """+str(retardo_red[len(retardo_red)-1])+""" ms
     JITTER: """+str(jitter[len(jitter)-1])+""" ms
-    Nº DE CLIENTES: """+str(nc[len(nc)-1])+""" clientes
-    Nº DE LINEAS POR CLIENTE: """+str(nl[len(nl)-1])+"""
+    NUMERO DE CLIENTES: """+str(nc[len(nc)-1])+""" clientes
+    NUMERO DE LINEAS POR CLIENTE: """+str(nl[len(nl)-1])+"""
     TIEMPO MEDIO POR LLAMADA: """+str(tpll[len(tpll)-1])+""" mins
     PROB. DE BLOQUEO: """+str(pb[len(pb)-1])+""" %
     ANCHO DE BANDA DE RESERVA: """+str(banda_reserva[len(banda_reserva)-1])+""" porcentaje
