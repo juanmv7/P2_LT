@@ -205,7 +205,7 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     port = 587
     smtp_server = "correo.ugr.es"
     sender_email = "pablorofu@correo.ugr.es"
-    receiver_email = "pablito4292@gmail.com" #entradas[12]
+    receiver_email = entradas[12]
     password="teleco4"
 
 
@@ -229,7 +229,7 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     cabeceras_de_entradas=[]
     
     
-    entradas_cte=["0-23","0-23","0-23","9-1","1-2","2-3","3-4","4-5","5-800","6-132","7-12345","8-1","9-2","10-True","11-1","11-5","10-False"]
+    #entradas_cte=["0-23","0-23","0-23","9-1","1-2","2-3","3-4","4-5","5-800","6-132","7-12345","8-1","9-2","10-True","11-1","11-5","10-False"]
     #le quitamos los guiones a la lista entradas_cte
     for z in range(0,len(entradas_cte)):#NO HACE FALTA PONER -1, YA LO HACE RANGE
         entradas_sin_guiones.append(entradas_cte[z].split("-"))
@@ -298,7 +298,7 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     salidas_sin_cabecera=[]
     
         
-    salidas_cte=["0-23","0-1234","1-G711","2-475849","3-True","3-False","4-938387473","5-2372732","6-False","6-True"]
+    #salidas_cte=["0-23","0-1234","1-G711","2-475849","3-True","3-False","4-938387473","5-2372732","6-False","6-True"]
     for z in range(0,len(salidas_cte)):#NO HACE FALTA PONER -1, YA LO HACE RANGE
         salidas_sin_guiones.append(salidas_cte[z].split("-"))
     for j in range(0,len(salidas_sin_guiones)):
@@ -357,7 +357,7 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     Nº DE LINEAS POR CLIENTE: """+vector[5]+"""
     TIEMPO MEDIO POR LLAMADA: """+vector[6]+""" mins
     PROB. DE BLOQUEO: """+vector[7]+""" %
-    ANCHO DE BANDA DE RESERVA: """+vector[8]+""" %
+    ANCHO DE BANDA DE RESERVA: """+vector[8]+""" porcentaje
     ANCHO DE BANDA REQUERIDO: """+vector[9]+""" bps
     COMPRESION cRTP: """+str(cRTP)+"""
     TIPO DE ENCAPSULACION: """+str(encapsulacion)+"""
@@ -385,7 +385,7 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     Nº DE LINEAS POR CLIENTE: """+str(nl[len(nl)-1])+"""
     TIEMPO MEDIO POR LLAMADA: """+str(tpll[len(tpll)-1])+""" mins
     PROB. DE BLOQUEO: """+str(pb[len(pb)-1])+""" %
-    ANCHO DE BANDA DE RESERVA: """+str(banda_reserva[len(banda_reserva)-1])+""" %
+    ANCHO DE BANDA DE RESERVA: """+str(banda_reserva[len(banda_reserva)-1])+""" porcentaje
     ANCHO DE BANDA REQUERIDO: """+str(banda_requerido[len(banda_requerido)-1])+""" bps
     COMPRESION cRTP: """+str(cRTP[len(cRTP)-1])+"""
     TIPO DE ENCAPSULACION: """+str(encapsulacion[len(encapsulacion)-1])+"""
