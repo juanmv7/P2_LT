@@ -347,11 +347,11 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
 
     message = """
     
-    From: JimenezMuñozBarreto@correo.ugr.es
+    From: JimenezVillalonBarreto@correo.ugr.es
     TO: """ + receiver_email + """
     Subject: Informe Final 
     
-    Empresa: <JimenezMuñozBarretoRobles.SA>
+    Empresa: <JimenezVillalonBarretoRobles.SA>
     
     
     
