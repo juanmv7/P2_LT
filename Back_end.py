@@ -186,7 +186,26 @@ def Calculo_BWst(Nlineas, posicion_codec, BWres, BW_cliente, bool_cRTP, encapsul
         
     return(BW_st, cumple)
     
-    
+
+
+# @brief Esta funcion calcula el ancho de banda necesario para cursar Nlineas llamadas
+#        a partir del tipo de encapsulacion y del uso de cRTP o no. Además compara
+#        con el BW introducido por el cliente y si cumple o no con este.
+# 
+# @param[in]  Nlineas              Numero de llamadas
+# @param[in]  posicion_codec       Posicion del codec en TABLA
+# @param[in]  BWres                Ancho de banda de reserva (en porcentaje)
+# @param[in]  BW_cliente           Ancho de banda introducido por el cliente
+# @param[in]  encapsulacion        Tipo de encapsulacion de los paquetes 
+#                                       - Ethernet: 1
+#                                       - Ethernet 802.1q: 2
+#                                       - Ethernet q-in-q: 3
+#                                       - PPPOE: 4
+#                                       - PPPOE 802.1q: 5
+# @param[in]  bool_cRTP            Indica si se va a hacer compresión RTP
+# @param[out] BW_st                Ancho de banda resultante
+# @param[out] Cumple                Indica si el ancho de banda cumple con el introducido por el cliente
+##       
 def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte): 
     
 #"Introduzca el valor deseado del MOS:"0
@@ -348,6 +367,8 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     Subject: Informe Final 
     
     AQUI TENEMOS LOS DATOS QUE USTED HA INTRODUCIDO:
+    
+    
     
     MOS: """+vector[0]+"""
     RETARDO REQUERIDO: """+vector[1]+""" ms
