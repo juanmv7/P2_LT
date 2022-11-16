@@ -186,7 +186,7 @@ def Calculo_BWst(Nlineas, posicion_codec, BWres, BW_cliente, bool_cRTP, encapsul
         
     return(BW_st, cumple)
     
-    
+  
 def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte): 
     
 #"Introduzca el valor deseado del MOS:"0
@@ -347,6 +347,10 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     TO: """ + receiver_email + """
     Subject: Informe Final 
     
+    
+    
+    **************************************************************
+    
     AQUI TENEMOS LOS DATOS QUE USTED HA INTRODUCIDO:
     
     MOS: """+vector[0]+"""
@@ -354,7 +358,7 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     RETARDO DE RED: """+vector[2]+""" ms
     JITTER: """+vector[3]+"""" ms
     NUMERO DE CLIENTES: """+vector[4]+""" clientes
-    NUMERO DE LINEAS POR CLIENTE: """+vector[5]+"""
+    NUMERO DE LINEAS POR CLIENTE: """+vector[5]+""" lineas
     TIEMPO MEDIO POR LLAMADA: """+vector[6]+""" mins
     PROB. DE BLOQUEO: """+vector[7]+""" porcentaje
     ANCHO DE BANDA DE RESERVA: """+vector[8]+""" porcentaje

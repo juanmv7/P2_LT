@@ -67,6 +67,7 @@ def codigoBoton():
     i=i+1
     frames[i].pack(fill='both', expand=1) #mostramos el siguiente frame
     
+
 # Funcion para comprobar que se ha escrito algo. Si no se ha escrito, salta un error
 def check_errors():
     global valores
@@ -138,11 +139,17 @@ def label_solucion(solucion):
 def enviar_correo():
     global i
     valores.append(cuadroTexto[i].get())
-    conectar_server()
-    miLabel4=tk.Label(frames[12], text="Se ha enviado el informe a su correo.", fg="green",bg="lightblue",font=("Comic Sans",10))
-    miLabel4.place(x=230,y=260)
-    messagebox.showinfo('VoIP Network Designer', 'Se ha enviado el correo.')
-    root.destroy() #el programa acaba y cerramos la ventana
+    
+    
+    if(not("@gmail.com" in valores[i]) or (not("@ugr.es" in valores[i]))):
+       messagebox.showerror('VoIP Network Designer', 'Error: Ha inntroducido un correo invalido.')
+      
+    else:
+       conectar_server()
+       miLabel4=tk.Label(frames[12], text="Se ha enviado el informe a su correo.", fg="green",bg="lightblue",font=("Comic Sans",10))
+       miLabel4.place(x=230,y=260)
+       messagebox.showinfo('VoIP Network Designer', 'Se ha enviado el correo.')
+       root.destroy() #el programa acaba y cerramos la ventana
 
 ########## CREACION VENTANA RAIZ #############
 
