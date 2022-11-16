@@ -390,7 +390,7 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     
     LOS DATOS FINALES QUE HEMOS UTILIZADO PARA LOS CALCULOS SON:
         
-    Estos datos reflejan los últimos valores que ha introducido.
+    Estos datos reflejan los ultimos valores que ha introducido.
         
     MOS: """+str(MOS[len(MOS)-1])+"""
     RETARDO REQUERIDO: """+str(retardo[len(retardo)-1])+""" ms
@@ -407,7 +407,7 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
   
     LAS SALIDAS FINALES SON:
         
-    Esta es la configuración final para su comunicación.
+    Esta es la configuracion final para su comunicacion.
 
     MOS ELEGIDO: """ +str(MOS_elegido[len(MOS_elegido)-1])+ """
     CODEC ELEGIDO: """ +str(codec_elegido[len(codec_elegido)-1])+ """
