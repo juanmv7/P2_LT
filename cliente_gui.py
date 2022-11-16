@@ -74,17 +74,20 @@ def check_errors():
     if ((valores[i].isspace()) or (valores[i]=='')):
         messagebox.showerror('VoIP Network Designer', 'Error: No ha introducido nada.')
         valores[i]='1'
-        retroceder_pagina()
+        if(i>0):
+            retroceder_pagina()
         
     if ((valores[i].isalpha())):
         messagebox.showerror('VoIP Network Designer', 'Error: La entrada no se esperaba alfanumérica.')
         valores[i]='1'
-        retroceder_pagina()
+        if(i>0):
+            retroceder_pagina()
         
     if ((' ' in valores[i])):
         messagebox.showerror('VoIP Network Designer', 'Error: La entrada no puede contener espacios.')
         valores[i]='1'
-        retroceder_pagina()
+        if(i>0):
+            retroceder_pagina()
         
 # Funcion para establecer conexion TCP con el servidor
 def conectar_server():
