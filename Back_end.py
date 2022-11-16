@@ -206,7 +206,7 @@ def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte):
     smtp_server = "correo.ugr.es"
     sender_email = "pablorofu@correo.ugr.es"
     receiver_email = "pablito4292@gmail.com" #entradas[12]
-    password=input("Escribe el password de tu correo ugr: \n")
+    password="teleco4"
 
 
     j=0
