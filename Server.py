@@ -8,7 +8,7 @@ datos_vector=[0,0,0,0,0,0,0,0,0,0,0,0,0] #datos_vector: Vector que inicializamos
 datos_vector_cte = [] #datos_vector_cte: Vector que se llenará de todos los datos introducidos por el cliente, será un registro.
 resultado_cte = [] #resultado_cte: Vector con todos los resultados con los que pruebe el cliente.
 resultado="" #resultado: Resultado final calculado a a partir de los datos finales.
-bucle=True #Bucle que cuando se envia un correo se sale
+bucle=True #Bucle: Variable booleana que cambia cuando se envia un correo.
 
 # Se crea el socket TCP/IP
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -44,7 +44,7 @@ while bucle:
         i=int(message[0])
         data=message[1]
 
-        # Tenemos que pasar los datos a floar (general) ya que vienen en forma de str. El 12 es el correo así que NO.
+        # Tenemos que pasar los datos a float (general) ya que vienen en forma de str. El 12 es el correo así que NO.
         if (i<12):
             datos_vector[i]=float(data)
 

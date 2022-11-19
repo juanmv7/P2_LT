@@ -21,7 +21,8 @@ mensaje=["Introduzca el valor deseado del MOS:", "Introduzca el retardo requerid
 
 
 
-#Crear y avanzar frame sera lo mismo. Esto implica que cada vez que volvamos atras, debemos volver a rellenar (y por tanto reecribir) el frame
+#@brief Funcion que va creando nuevos frames y los va añadiendo al 
+# vector frames, para poder ir visualizando los diferentes datos
 def crear_frame():
     global frames
     frames.append(tk.Frame(root, width=400, height=200,bg="lightblue"))
