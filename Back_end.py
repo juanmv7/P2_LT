@@ -189,9 +189,8 @@ def Calculo_BWst(Nlineas, posicion_codec, BWres, BW_cliente, bool_cRTP, encapsul
     
 
 
-# @brief Esta funcion calcula el ancho de banda necesario para cursar Nlineas llamadas
-#        a partir del tipo de encapsulacion y del uso de cRTP o no. Además compara
-#        con el BW introducido por el cliente y si cumple o no con este.
+# @brief Esta funcion envia un correo en el que se deja constancia de los datos que se han ido introduciendo en cada frame de la GUI, los 
+#        valores finalmente introducidos y sus respectivos resultados parciales y finales
 # 
 # @param[in]  entradas              Es una lista de los últimos valores de entrada 
 #                                   en la que cada componente 
