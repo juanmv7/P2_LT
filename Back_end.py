@@ -2,8 +2,9 @@
 """
 Created on Wed Nov  2 11:19:11 2022
 
-@author: Juan Muñoz
+@authors: Juan Muñoz y Pablo Robles 
 """
+
 import numpy as np
 import smtplib
 from math import factorial
@@ -208,6 +209,7 @@ def Calculo_BWst(Nlineas, posicion_codec, BWres, BW_cliente, bool_cRTP, encapsul
 #                                   En esta lista cada componente
 #                                   son dos valores separados por guiones,
 #                                   estos valores son la cabecera y el valor del parámetro de salida
+#
 ##     
   
 def Envio_correo_informe(entradas, salidas, entradas_cte, salidas_cte): 

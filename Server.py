@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Nov  2 11:19:11 2022
+
+@author: Juan Muñoz y Javier Jiménez 
+"""
+
 # Programa Servidor
 
 import socket

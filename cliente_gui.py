@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Spyder Editor
+Created on Wed Nov  2 11:19:11 2022
 
+@author: Javier Jiménez, Renan Barreto y Juan Muñoz
 """
 
 import tkinter as tk
@@ -144,11 +145,6 @@ def enviar_correo():
     global i
     valores.append(cuadroTexto[i].get())
     
-    
-    #if(not("@gmail.com" in valores[i]) or (not("@ugr.es" in valores[i]))):
-    #   messagebox.showerror('VoIP Network Designer', 'Error: Ha introducido un correo invalido.')
-      
-    #else:
     conectar_server()
     miLabel4=tk.Label(frames[12], text="Se ha enviado el informe a su correo.", fg="green",bg="lightblue",font=("Comic Sans",10))
     miLabel4.place(x=230,y=260)
